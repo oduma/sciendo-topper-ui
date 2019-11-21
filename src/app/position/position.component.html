@@ -1,0 +1,18 @@
+<div class="table">
+        <div class="row">
+          <div class="cell rowspan2 position">
+                      {{currentEntryRank}}
+            </div>
+          <div class="cell">
+              <span *ngIf="previousEntryRank!=0">{{movement}}</span>    
+              <fa *ngIf="previousEntryRank===0" name="exclamation" class="text-danger sub-align"></fa>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell"><fa *ngIf="currentEntryRank<previousEntryRank || previousEntryRank===0" 
+            name="chevron-circle-up" 
+            class="text-success" size="2x"></fa>
+        <fa *ngIf="currentEntryRank>previousEntryRank && previousEntryRank>0" name="chevron-circle-down" class="text-danger" size="2x"></fa>
+        <fa *ngIf="currentEntryRank===previousEntryRank" name="stop-circle" class="text-warning" size="2x"></fa></div>
+        </div>
+      </div>

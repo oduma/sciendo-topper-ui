@@ -1,0 +1,14 @@
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" [routerLink]="['/daily']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">Daily</a>
+    <a class="navbar-brand" [routerLink]="['/overall']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">Overall</a>
+    <a class="navbar-brand" [routerLink]="['/history',lastYear]"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">History</a>
+    <a class="navbar-brand" [routerLink]="['/admin']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">Admin</a>
+</nav>

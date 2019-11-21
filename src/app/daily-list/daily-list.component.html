@@ -1,0 +1,30 @@
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Select</th>
+            <th scope="col">Position</th>
+            <th scope="col">Name</th>
+            <th scope="col">Points</th>
+            <th scope="col">Points from<br/>Loved Tracks</th>
+            <th scope="col">Overall Position</th>
+            <th scope="col">Overall Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dayEntry of dayEntries | async">
+                <th scope="row">
+                    <app-entry-selector [entryId]="dayEntry.id"></app-entry-selector>
+                </th>
+                <td><app-position 
+                    [currentEntryRank]="dayEntry.dayPosition.positionRank" 
+                    [previousEntryRank]="dayEntry.previousDayPosition.positionRank"></app-position></td>
+                <td class="big-text">{{dayEntry.name}}</td>
+                <td class="big-text">{{dayEntry.dayPosition.positionPoints.totalPoints}}</td>
+                <td class="big-text">{{dayEntry.dayPosition.positionPoints.lovedPoints}}</td>
+                <td><app-position 
+                    [currentEntryRank]="dayEntry.overallPosition.positionRank" 
+                    [previousEntryRank]="dayEntry.previousDayOverallPosition.positionRank"></app-position></td>
+                <td class="big-text">{{dayEntry.overallPosition.positionPoints.totalPoints}}</td>
+        </tr>
+    </tbody>
+</table>

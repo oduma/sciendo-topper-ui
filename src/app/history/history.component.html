@@ -1,0 +1,12 @@
+<br/>
+<select [(ngModel)]="currentYear" 
+  #yearSelect 
+  (change)="onYearSelectChange(yearSelect.value)" 
+  class="custom-select custom-select-lg mb-3">
+  <option *ngFor="let year of allYears | async" value="{{year}}">{{year}}</option>
+</select>
+<div class="container-fluid">
+  <div class="row">
+      <app-history-list></app-history-list>
+  </div>
+</div>

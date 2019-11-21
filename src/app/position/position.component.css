@@ -1,0 +1,35 @@
+.position{
+    font-size: 200%;
+    vertical-align: text-top;
+    
+}
+
+.sub-align{
+    align-content: center;
+    text-align: center;
+}
+
+@supports (display:grid) and (display:contents) {
+  .table {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "cell1 cell2" "cell1 cell3";
+  }
+  .row {
+    display: contents/* hide them in the structure. .row respective children become sibblings */
+  }
+  .row:first-child>:first-child.rowspan2{
+    grid-area: cell1;
+  }
+  .row:first-child div {
+    grid-area: cell2;
+  }
+  .row:first-child div {
+    grid-area: cell3;
+    /*grid-row:span 2; no need if grid-template-area is complete*/
+  }
+  div div {
+    padding: 2px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,18 @@
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Position</th>
+            <th scope="col">Name</th>
+            <th scope="col">Points</th>
+            <th scope="col">Points from<br/>Loved Tracks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class = "big-text" *ngFor="let historyEntry of historyEntries | async">
+                <td>{{historyEntry.overallPosition.positionRank}}</td>
+                <td class="big-text">{{historyEntry.name}}</td>
+                <td class="big-text">{{historyEntry.overallPosition.positionPoints.totalPoints}}</td>
+                <td class="big-text">{{historyEntry.overallPosition.positionPoints.lovedPoints}}</td>
+        </tr>
+    </tbody>
+</table>

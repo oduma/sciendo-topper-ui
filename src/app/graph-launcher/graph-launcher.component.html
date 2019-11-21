@@ -1,0 +1,15 @@
+<div *ngIf="selectedEntries$ | async as entries" >
+    <div *ngIf="entries.length>0">
+        <div class="row bg-light border border-bottom-0 border-primary rounded-top">
+            <h3>
+                <span class="badge badge-pill badge-warning badge-spacer">
+                    <span>{{entries.length}}</span>
+                </span>
+                Entries selected
+                <a class="right-align badge badge-pill badge-warning badge-spacer" (click)="open(entries)">
+                    Plot Evolution
+                </a>
+            </h3>
+        </div>
+    </div>
+</div>
