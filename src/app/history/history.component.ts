@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DateProvider } from '../services/date-provider';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -16,10 +16,10 @@ export class HistoryComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private router:Router) {
       this.currentYear=activeRoute.snapshot.params['year'];
-      this.allYears=dateProvider.historyYears;
    }
 
   ngOnInit() {
+    this.allYears=this.dateProvider.getHistoryYears();
   }
 
   onYearSelectChange(selectedValue)

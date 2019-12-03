@@ -1,17 +1,24 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import { DayEntry } from '../models/day-entry';
 import { Observable, of, from } from 'rxjs';
 import { OverallEntry } from '../models/overall-entry';
 import { EntrySelect } from '../models/entry-select';
 import { EntryWithEvolution } from '../models/entry-with-evolution';
+import { EnvironmentUrlService } from './environment-url-service.service';
 @Injectable({
     providedIn:'root'
 })
 @Injectable()
 export class RepositoryService {
     
-    constructor(){
+    constructor(private http: HttpClient, private envUrl:EnvironmentUrlService){
 
+    }
+
+    private createCompleteRoute(envAddress: string, route: string) 
+    {
+        return `${envAddress}/${route}`;
     }
 
     getEntriesByIds(entries:EntrySelect[]): Observable<EntryWithEvolution>
@@ -107,8 +114,8 @@ export class RepositoryService {
         const arraySource = of(tempOverallEntry);
         return arraySource;
     }
-    getHistoryYears(date:Date):Observable<number[]>{
-        return of([2018,2017,2016]);
+    getDataNoParams(route: string){
+        return this.http.get(this.createCompleteRoute(this.envUrl.urlAddress,route));
     }
 
 }

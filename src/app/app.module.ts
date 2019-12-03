@@ -4,7 +4,7 @@ import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { DailySituationComponent } from './daily-situation/daily-situation.component';
@@ -46,6 +46,7 @@ import { GraphModalComponent } from './graph-modal/graph-modal.component';
     BrowserModule,
     FormsModule,
     ChartsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path:'daily', component:DailySituationComponent},
       {path:'overall', component:OverallSituationComponent},
