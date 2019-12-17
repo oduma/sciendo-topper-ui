@@ -44,7 +44,7 @@ export class EntrySelectorService {
                         let elementNo: number=-1;
                         for(let i=0;i<selectedItems.length-1 || elementNo==-1; i++)
                         {
-                            if(selectedItems[i].entryId===entrySelect.entryId)
+                            if(selectedItems[i].entryName===entrySelect.entryName)
                                 elementNo=i;
                         }
                         let firstSlice: EntrySelect[]= selectedItems.slice(0,elementNo);
@@ -61,13 +61,13 @@ export class EntrySelectorService {
     handleEvent(e: any){
         if(e.target.checked)
         {
-            console.log("in the handle Event");
-            this.addEntry({entryId:e.target.id,selected:true});
+            console.log("in the handle Event: ",e.target.id);
+            this.addEntry({entryName:e.target.id,selected:true});
         }
         else
         {
             console.log("in the handle Event");
-            this.deleteEntry({entryId:e.target.id,selected:true})
+            this.deleteEntry({entryName:e.target.entryName,selected:true})
         }
     }
 

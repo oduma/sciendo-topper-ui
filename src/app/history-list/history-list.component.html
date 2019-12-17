@@ -3,16 +3,16 @@
         <tr>
             <th scope="col">Position</th>
             <th scope="col">Name</th>
-            <th scope="col">Points</th>
-            <th scope="col">Points from<br/>Loved Tracks</th>
+            <th scope="col">Score</th>
+            <th scope="col">No Of Loved Tracks</th>
         </tr>
     </thead>
     <tbody>
         <tr class = "big-text" *ngFor="let historyEntry of historyEntries | async">
-                <td>{{historyEntry.overallPosition.positionRank}}</td>
+                <td>{{historyEntry.currentOverallPosition.rank}}</td>
                 <td class="big-text">{{historyEntry.name}}</td>
-                <td class="big-text">{{historyEntry.overallPosition.positionPoints.totalPoints}}</td>
-                <td class="big-text">{{historyEntry.overallPosition.positionPoints.lovedPoints}}</td>
+                <td class="big-text">{{historyEntry.currentOverallPosition.score}}</td>
+                <td class="big-text">{{historyEntry.currentOverallPosition.noOfLovedTracks}}</td>
         </tr>
     </tbody>
 </table>

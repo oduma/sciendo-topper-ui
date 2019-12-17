@@ -7,7 +7,7 @@ import { EntrySelectorService } from '../services/entry-selector-service';
   styleUrls: ['./entry-selector.component.css']
 })
 export class EntrySelectorComponent implements OnInit {
-  @Input() entryId:string;
+  @Input() entryName:string;
   constructor(private entrySelectorService: EntrySelectorService) { }
 
   ngOnInit() {

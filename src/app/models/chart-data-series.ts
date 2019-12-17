@@ -1,7 +1,13 @@
-import { Observable } from 'rxjs';
+import { ChartDataSets } from 'chart.js';
+import { Color } from 'ng2-charts';
 
-export interface ChartDataSeries {
-    observableData:Observable<number>;
-    label:string;
-
+export class DataForChart{
+    timeLineMilestones:string[];
+    dataSeries:ChartDataSets[];
+    chartColors: Color[];
+    constructor(){
+        this.timeLineMilestones=[];
+        this.dataSeries=[];
+        this.chartColors=[];
+    }
 }

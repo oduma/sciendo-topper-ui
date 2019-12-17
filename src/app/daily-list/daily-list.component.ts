@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DayEntry } from '../models/day-entry';
+import { DayEntryEvolution } from '../models/day-entry-evolution';
 import { Observable } from 'rxjs';
 import { DailySituationService } from '../services/daily-situation-service';
+import {Position} from './../models/position';
 
 @Component({
   selector: 'app-daily-list',
@@ -9,12 +10,18 @@ import { DailySituationService } from '../services/daily-situation-service';
   styleUrls: ['./daily-list.component.css']
 })
 export class DailyListComponent implements OnInit {
-  dayEntries: Observable<DayEntry[]>;
+  dayEntries: Observable<DayEntryEvolution[]>;
   constructor(public dailySituationService: DailySituationService) {
-    this.dayEntries= dailySituationService.dayEntries;
+   }
+
+   getRank(position: Position):number{
+     if(position==null)
+      return 0;
+    return position.rank;
    }
 
   ngOnInit() {
+    this.dayEntries=this.dailySituationService.getDayEntries();
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GraphDataProviderService } from '../services/graph-data-provider.service';
 import { EntrySelect } from '../models/entry-select';
+import { EntrySelectorService } from '../services/entry-selector-service';
 
 @Component({
   selector: 'app-graph-modal',
@@ -10,8 +11,8 @@ import { EntrySelect } from '../models/entry-select';
 })
 export class GraphModalComponent implements OnInit {
   entries: EntrySelect[];
-  constructor(public activeModal: NgbActiveModal, private graphDataProvider: GraphDataProviderService) {
-    this.entries=graphDataProvider.plotedEntries;
+  constructor(public activeModal: NgbActiveModal, entrySelectorService:EntrySelectorService) {
+    entrySelectorService.selectedItems.subscribe(val=>this.entries=val);
    }
 
   ngOnInit() {

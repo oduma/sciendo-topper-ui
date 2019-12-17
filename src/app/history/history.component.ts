@@ -20,12 +20,14 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {
     this.allYears=this.dateProvider.getHistoryYears();
+    this.currentYear=this.activeRoute.snapshot.params['year'];
   }
 
   onYearSelectChange(selectedValue)
   {
     console.log(`changed to: ${selectedValue}`);
     let yearHistoryUrl=`history/${selectedValue}`;
+    this.currentYear=selectedValue;
     this.router.navigate([yearHistoryUrl]);
   }
 }

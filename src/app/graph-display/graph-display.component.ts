@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import { GraphDataProviderService } from '../services/graph-data-provider.service';
-import { ChartDataSeries } from '../models/chart-data-series';
+import { DataForChart } from '../models/chart-data-series';
+import { tap, map } from 'rxjs/operators';
+import { EntrySelectorService } from '../services/entry-selector-service';
+import { RepositoryService } from '../services/repository-service';
+import { EntryTimeLine } from '../models/entry-time-line';
+import { EntrySelect } from '../models/entry-select';
 
 @Component({
   selector: 'app-graph-display',
@@ -10,7 +15,7 @@ import { ChartDataSeries } from '../models/chart-data-series';
   styleUrls: ['./graph-display.component.css']
 })
 export class GraphDisplayComponent implements OnInit {
-  lineChartData: ChartDataSets[] = [];
+  lineChartData: ChartDataSets[]=[];
   lineChartLabels: Label[] = [];
   lineChartOptions = {
     responsive: true,
@@ -20,23 +25,24 @@ export class GraphDisplayComponent implements OnInit {
   lineChartType = 'line';
   
   lineChartColors: Color[] = [];
-  private lightBackgroundColor: string='rgba(255,255,255,0.28)';
 
-  constructor(private graphDataProvider: GraphDataProviderService) {
-
+  constructor(private graphDataProvider: GraphDataProviderService, private entrySelectorService:EntrySelectorService,private repositoryService:RepositoryService) {
+    var selectedEntries:EntrySelect[];
+    this.entrySelectorService.selectedItems.subscribe(val=>selectedEntries=val);
+    this.repositoryService.getDataWithParams('api/entries/gettimelines',selectedEntries)
+    .pipe(tap((r)=>console.log("from the service: ",r)),
+      map(res=>{
+        return res as EntryTimeLine[];
+    })).subscribe((val)=>{
+      var dataForChart:DataForChart=this.graphDataProvider.plotEntries(val);
+      this.lineChartLabels=dataForChart.timeLineMilestones;
+      this.lineChartData=dataForChart.dataSeries;
+      this.lineChartColors=dataForChart.chartColors;
+    }    
+  
+    );
    }
-
   ngOnInit() {
-    this.graphDataProvider.timeLineMilestones
-      .subscribe((currentTimeLineMilestone: string)=>this.lineChartLabels.push(currentTimeLineMilestone));
-    this.graphDataProvider.chartDataSeries.subscribe((chartDataSeries:ChartDataSeries)=>{
-        let dataSeries:number[]=[];
-        chartDataSeries.observableData.subscribe((val:number)=>dataSeries.push(val));
-        this.lineChartData.push({data:dataSeries, label:chartDataSeries.label});
-    });
-    this.graphDataProvider.colorsSelected.subscribe((val:string)=>
-      this.lineChartColors.push({borderColor:val,backgroundColor:this.lightBackgroundColor}))
-
   }
 
 

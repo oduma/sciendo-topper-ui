@@ -5,20 +5,20 @@
                 <th scope="col">Position</th>
                 <th scope="col">Name</th>
                 <th scope="col">Points</th>
-                <th scope="col">Points from<br/>Loved Tracks</th>
+                <th scope="col">No. Loved Tracks</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let overallEntry of overallEntries | async">
                     <th scope="row">
-                        <app-entry-selector [entryId]="overallEntry.id"></app-entry-selector>
+                        <app-entry-selector [entryName]="overallEntry.name"></app-entry-selector>
                     </th>
                     <td><app-position 
-                        [currentEntryRank]="overallEntry.overallPosition.positionRank" 
-                        [previousEntryRank]="overallEntry.previousDayOverallPosition.positionRank"></app-position></td>
+                        [currentEntryRank]="getRank(overallEntry.currentOverallPosition)" 
+                        [previousEntryRank]="getRank(overallEntry.previousDayOverallPosition)"></app-position></td>
                     <td class="big-text">{{overallEntry.name}}</td>
-                    <td class="big-text">{{overallEntry.overallPosition.positionPoints.totalPoints}}</td>
-                    <td class="big-text">{{overallEntry.overallPosition.positionPoints.lovedPoints}}</td>
+                    <td class="big-text">{{overallEntry.currentOverallPosition.score}}</td>
+                    <td class="big-text">{{overallEntry.currentOverallPosition.noOfLovedTracks}}</td>
             </tr>
         </tbody>
     </table>

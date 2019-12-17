@@ -1,4 +1,4 @@
 export interface EntrySelect {
-    entryId: string;
+    entryName: string;
     selected: boolean;
 }

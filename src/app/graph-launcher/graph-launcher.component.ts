@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { EntrySelect } from '../models/entry-select';
 import { EntrySelectorService } from '../services/entry-selector-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,15 +13,14 @@ import { GraphDataProviderService } from '../services/graph-data-provider.servic
 })
 export class GraphLauncherComponent implements OnInit {
   selectedEntries$:Observable<EntrySelect[]>;
-  constructor(private entrySelectorService: EntrySelectorService, private modalService: NgbModal, public graphDataProvider: GraphDataProviderService) { }
+  constructor(private entrySelectorService: EntrySelectorService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.selectedEntries$=this.entrySelectorService.selectedItems;
   }
 
   open(entries: EntrySelect[]){
-    console.log(entries);
-    this.graphDataProvider.plotEntries(entries);
+    this.entrySelectorService.selectedItems=of(entries);
     this.modalService.open(GraphModalComponent,{size: 'lg'});
   }
 }
