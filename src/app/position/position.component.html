@@ -1,4 +1,4 @@
-<div class="table">
+<div *ngIf="isRanked" class="table">
         <div class="row">
           <div class="cell rowspan2 position">
                       {{currentEntryRank}}
@@ -16,3 +16,4 @@
         <fa *ngIf="currentEntryRank===previousEntryRank" name="stop-circle" class="text-warning" size="2x"></fa></div>
         </div>
       </div>
+<div *ngIf="!isRanked">Not<br/>Ranked</div>

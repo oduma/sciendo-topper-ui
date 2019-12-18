@@ -9,10 +9,12 @@ export class PositionComponent implements OnInit {
   @Input() currentEntryRank:number;
   @Input() previousEntryRank:number;
   movement:string;
+  isRanked:boolean=true;
   constructor() { }
 
   ngOnInit() {
     let tempMovement=this.previousEntryRank-this.currentEntryRank;
     this.movement=(tempMovement>0)?`+${tempMovement}`:`${tempMovement}`;
+    this.isRanked=(this.currentEntryRank<9999);
   }
 }
