@@ -1,24 +1,19 @@
 import { Injectable } from '@angular/core';
-import { EntrySelect } from '../models/entry-select';
-import { RepositoryService } from './repository-service';
-import { Observable, forkJoin, of, from } from 'rxjs';
-import { EntryWithEvolution } from '../models/entry-with-evolution';
-import { map, mergeAll, distinct, scan, reduce, find, take } from 'rxjs/operators';
-import { EntryEvolution } from '../models/entry-evolution';
-import { ChartDataSeries } from '../models/chart-data-series';
-
+import { Observable, of, from } from 'rxjs';
+import { EntryTimeLine } from '../models/entry-time-line';
+import { map, take, distinct } from 'rxjs/operators';
+import {DataForChart } from '../models/chart-data-series';
+import { PositionAtDate } from '../models/position-at-date';
+import { ChartDataSets } from 'chart.js';
 @Injectable({
   providedIn: 'root'
 })
 export class GraphDataProviderService {
 
-  plotedEntries: EntrySelect[];
-  timeLineMilestones: Observable<string>;
-  chartDataSeries:Observable<ChartDataSeries>;
-  colorsAvailable:Observable<string>;
-  colorsSelected:Observable<string>;
+  private colorsAvailable:Observable<string>;
+  private lightBackgroundColor: string='rgba(255,255,255,0.28)';
 
-  constructor(private repositoryService: RepositoryService) {
+  constructor() {
     this.colorsAvailable=Observable.create(function(observer){
       observer.next('#fa4dc3');
       observer.next('#aed1fc');
@@ -31,43 +26,71 @@ export class GraphDataProviderService {
     });
    }
    
-   private processEntryWithEvolution(entryWithEvolution:EntryWithEvolution, sortedDates:Observable<Date>):Observable<number>{
-    return sortedDates.pipe(
-      map((currentDate:Date)=>{
-        let foundEvolutionEntry = entryWithEvolution.entryEvolution.find((val: EntryEvolution)=>val.date===currentDate);
-        if(foundEvolutionEntry==null)
-          return null;
-        else
-          return foundEvolutionEntry.position.positionPoints.totalPoints;
-            }));
+   private processEntryWithEvolution(entryTimeLine:EntryTimeLine, sortedDates:string[]):ChartDataSets{
+
+    let chartDataSet:ChartDataSets={label:"",data: []};
+    sortedDates.map((currentDate)=>{
+            let foundEntryTimeLine = entryTimeLine.positionAtDates.find((val: PositionAtDate)=>val.date===currentDate);
+            if(foundEntryTimeLine==null)
+              chartDataSet.data.push(null);
+            else
+              chartDataSet.data.push(foundEntryTimeLine.position.score);
+          });
+
+    chartDataSet.label=entryTimeLine.name;
+    return chartDataSet;
+  }
+
+  plotEntries(entriesTimelines: EntryTimeLine[]):DataForChart{
+    const dates:string[]= [];
+    let distinctSortedDates:string[]=[];
+    
+    var result: DataForChart= new DataForChart();
+    of(entriesTimelines).pipe(
+      map((entryTimeLines:EntryTimeLine[])=>{
+        entryTimeLines.map((e)=>{
+          e.positionAtDates.map((p)=>dates.push(p.date))
+        });
+        return dates;
+      }
+      )
+    ).subscribe((val)=>{
+      from(this.sortDates(val)).pipe(distinct()).subscribe((v)=>distinctSortedDates.push(v));
+    });
+
+    result.timeLineMilestones= distinctSortedDates.map((sortedDate:string)=>{
+      let tempDate=sortedDate.split("-");
+      return `${tempDate[2]}-${tempDate[1]}-${tempDate[0]}`;
+    });
+
+    from(entriesTimelines).pipe(
+       map((entryTimeLine:EntryTimeLine)=>{
+           return this.processEntryWithEvolution(entryTimeLine,distinctSortedDates)
+       })).subscribe((val)=>result.dataSeries.push(val));
+
+
+    this.colorsAvailable
+      .pipe(take(entriesTimelines.length))
+      .subscribe((val:string)=>
+       result.chartColors.push({borderColor:val,backgroundColor:this.lightBackgroundColor}))
+    return result;
+
    }
 
-   public plotEntries(entries: EntrySelect[]){
-     
-    this.plotedEntries=entries;
-    const dates:Date[]= [];
-    
-    
-    const entriesWithEvolution:Observable<EntryWithEvolution>=
-      this.repositoryService.getEntriesByIds(entries);
-
-    entriesWithEvolution.pipe(
-       map((entryWithEvolution: EntryWithEvolution)=>entryWithEvolution.entryEvolution), 
-       mergeAll(),
-       distinct()).pipe(
-         map((entryEvolution:EntryEvolution)=>entryEvolution.date))
-       .subscribe((curDate:Date)=>dates.push(curDate));
-    let sortedDates=from(dates.sort((a,b)=>a.getTime()-b.getTime()));
-    this.timeLineMilestones = sortedDates.pipe(map((date)=>date.toDateString()));
-    
-    this.chartDataSeries=entriesWithEvolution.pipe(
-      map((entryWithEvolution:EntryWithEvolution)=>
-        {
-          let chartDataSeries: ChartDataSeries={
-            observableData: this.processEntryWithEvolution(entryWithEvolution,sortedDates), 
-            label:entryWithEvolution.name};
-          return chartDataSeries;
-        }));
-    this.colorsSelected=this.colorsAvailable.pipe(take(entries.length));
+   sortDates(initialArray: string[]): string[]{
+       return initialArray.sort((a,b)=>{
+          if(a<b)
+          {
+            return -1;
+          }
+          if(a==b)
+          {
+            return 0;
+          }
+          if(a>b)
+          {
+            return 1;
+          }
+      })
    }
 }

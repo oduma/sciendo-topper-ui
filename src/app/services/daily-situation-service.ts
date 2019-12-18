@@ -3,7 +3,7 @@ import { Observable,of } from 'rxjs'
 import { DayEntryEvolution } from '../models/day-entry-evolution'
 import { RepositoryService } from './repository-service';
 import { DateProvider } from './date-provider';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 @Injectable({
     providedIn:'root'
 })
@@ -20,7 +20,8 @@ export class DailySituationService {
         console.log("for date: ", this.dateProvider.date);
         console.log("formatted date: ",formattedDate);
         return this.repository.getDataNoParams(`api/entries/getbydate/${formattedDate}`)
-        .pipe(map(res=>{
+        .pipe(tap((r)=>console.log("dailyList going to server: ", r)),
+            map(res=>{
             return res as DayEntryEvolution[]
         }));
 

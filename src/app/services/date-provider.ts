@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class DateProvider {
     date:Date;
     constructor(private repositoryService: RepositoryService){
-        this.date=new Date("2019-04-12");
+        this.date=new Date("2019-04-11");
     };
 
     getHistoryYears():Observable<number[]>
