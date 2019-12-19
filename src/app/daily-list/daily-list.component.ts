@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter,OnDestroy } from '@angular/core';
 import { DayEntryEvolution } from '../models/day-entry-evolution';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DailySituationService } from '../services/daily-situation-service';
 import {Position} from './../models/position';
 
@@ -11,6 +11,11 @@ import {Position} from './../models/position';
 })
 export class DailyListComponent implements OnInit {
   dayEntries: Observable<DayEntryEvolution[]>;
+  @Output()
+  onDateFound= new EventEmitter<string>();
+
+  dateFoundRef: Subscription=null;
+
   constructor(public dailySituationService: DailySituationService) {
    }
 
@@ -22,6 +27,10 @@ export class DailyListComponent implements OnInit {
 
   ngOnInit() {
     this.dayEntries=this.dailySituationService.getDayEntries();
+    this.dateFoundRef=this.dailySituationService.dateFound$.subscribe((s)=>this.onDateFound.emit(s));
   }
 
+  ngOnDestroy(){
+    this.dateFoundRef.unsubscribe();
+  }
 }

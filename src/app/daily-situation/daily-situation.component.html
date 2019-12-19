@@ -1,9 +1,9 @@
 <h1><span class="badge badge-pill badge-light">
-        {{date | date : 'dd/MMM/yyyy'}}
+        {{(date | async) | date : 'dd/MMM/yyyy'}}
 </span></h1>
 <div class="container container-fluid">
     <div class="row">
-        <app-daily-list></app-daily-list>
+        <app-daily-list (onDateFound)="foundDate($event)"></app-daily-list>
     </div>
     <div *ngIf="loaderService.isLoading | async">
         <app-spinner></app-spinner>
