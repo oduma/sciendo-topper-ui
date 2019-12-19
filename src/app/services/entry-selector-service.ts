@@ -11,11 +11,11 @@ const initialItems: EntrySelect[]=[];
 @Injectable()
 export class EntrySelectorService {
     selectedItems:Observable<EntrySelect[]>;
-    newSelectedItems: Subject<EntrySelect> = new Subject<EntrySelect>();
-    newDeSelectedItems: Subject<EntrySelect>= new Subject<EntrySelect>();
-    create: Subject<EntrySelect> = new Subject<EntrySelect>();
-    delete:Subject<EntrySelect>= new Subject<EntrySelect>();
-    updates:Subject<any>= new Subject<any>();
+    private newSelectedItems: Subject<EntrySelect> = new Subject<EntrySelect>();
+    private newDeSelectedItems: Subject<EntrySelect>= new Subject<EntrySelect>();
+    private create: Subject<EntrySelect> = new Subject<EntrySelect>();
+    private delete:Subject<EntrySelect>= new Subject<EntrySelect>();
+    private updates:Subject<any>= new Subject<any>();
     
     constructor(){
         this.selectedItems = this.updates.pipe(
@@ -78,5 +78,13 @@ export class EntrySelectorService {
     private addEntry(entrySelected: EntrySelect){
         console.log("in the addEntry");
         this.newSelectedItems.next(entrySelected);
+    }
+
+    clearAll(){
+        this.selectedItems.pipe(map((e:EntrySelect[])=>{
+            e.map((entry:EntrySelect)=>{
+                this.deleteEntry(entry);
+            });
+        }));
     }
 }

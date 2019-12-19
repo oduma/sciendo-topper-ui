@@ -16,6 +16,7 @@ export class GraphLauncherComponent implements OnInit {
   constructor(private entrySelectorService: EntrySelectorService, private modalService: NgbModal) { }
 
   ngOnInit() {
+    console.log("Init on graph launcher");
     this.selectedEntries$=this.entrySelectorService.selectedItems;
   }
 
