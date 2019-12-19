@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DateProvider } from '../services/date-provider';
 import { Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoaderService } from '../services/loader.service';
 
 @Component({
   selector: 'app-history',
@@ -14,11 +15,13 @@ export class HistoryComponent implements OnInit {
 
   constructor(private dateProvider: DateProvider,
     private activeRoute: ActivatedRoute,
-    private router:Router) {
+    private router:Router,
+    private loaderService: LoaderService) {
       this.currentYear=activeRoute.snapshot.params['year'];
    }
 
   ngOnInit() {
+    setTimeout(()=>this.loaderService.isLoading);
     this.allYears=this.dateProvider.getHistoryYears();
     this.currentYear=this.activeRoute.snapshot.params['year'];
   }

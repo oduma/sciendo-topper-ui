@@ -4,7 +4,7 @@ import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { DailySituationComponent } from './daily-situation/daily-situation.component';
@@ -20,6 +20,9 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { OverallListComponent } from './overall-list/overall-list.component';
 import { HistoryListComponent } from './history-list/history-list.component';
 import { GraphModalComponent } from './graph-modal/graph-modal.component';
+import { LoaderService } from './services/loader.service';
+import { InterceptorService } from './services/interceptor.service';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { GraphModalComponent } from './graph-modal/graph-modal.component';
     PositionComponent,
     OverallListComponent,
     HistoryListComponent,
-    GraphModalComponent
+    GraphModalComponent,
+    SpinnerComponent
   ],
   entryComponents:[
     GraphModalComponent
@@ -57,7 +61,14 @@ import { GraphModalComponent } from './graph-modal/graph-modal.component';
     ]),
     AngularFontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    LoaderService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:InterceptorService,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

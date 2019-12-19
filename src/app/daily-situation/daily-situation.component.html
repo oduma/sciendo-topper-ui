@@ -5,6 +5,9 @@
     <div class="row">
         <app-daily-list></app-daily-list>
     </div>
+    <div *ngIf="loaderService.isLoading | async">
+        <app-spinner></app-spinner>
+    </div>
     <div class="vbottom">
         <app-graph-launcher></app-graph-launcher>
     </div>

@@ -9,4 +9,7 @@
   <div class="row">
       <app-history-list [currentYear]="currentYear"></app-history-list>
   </div>
+  <div *ngIf="loaderService.isLoading | async">
+    <app-spinner></app-spinner>
+</div>
 </div>
