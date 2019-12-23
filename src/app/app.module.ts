@@ -61,6 +61,9 @@ import { SpinnerComponent } from './spinner/spinner.component';
     ]),
     AngularFontAwesomeModule
   ],
+  exports:[
+    RouterModule
+  ],
   providers: [
     LoaderService,
     {

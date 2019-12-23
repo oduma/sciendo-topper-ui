@@ -16,7 +16,7 @@ export class HistoryComponent implements OnInit {
   constructor(private dateProvider: DateProvider,
     private activeRoute: ActivatedRoute,
     private router:Router,
-    private loaderService: LoaderService) {
+    public loaderService: LoaderService) {
       this.currentYear=activeRoute.snapshot.params['year'];
    }
 

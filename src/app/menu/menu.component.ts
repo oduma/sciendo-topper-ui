@@ -8,7 +8,7 @@ import { DateProvider } from '../services/date-provider';
 })
 export class MenuComponent implements OnInit {
   lastYear:number;
-  constructor(private dateProvider: DateProvider) {
+  constructor(dateProvider: DateProvider) {
     this.lastYear=dateProvider.date.getFullYear()-1;
    }
 

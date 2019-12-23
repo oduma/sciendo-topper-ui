@@ -12,7 +12,7 @@ export class OverallSituationComponent implements OnInit {
   date: Date;
   constructor(private dateProvider: DateProvider,
      private entrySelectorService:EntrySelectorService,
-     private loaderService: LoaderService) {
+     public loaderService: LoaderService) {
     this.date=dateProvider.date;
   }
 

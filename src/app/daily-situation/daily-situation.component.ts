@@ -14,7 +14,7 @@ export class DailySituationComponent implements OnInit {
   
   constructor(dateProvider:DateProvider, 
     private entrySelectorService: EntrySelectorService, 
-    private loaderService:LoaderService) {
+    public loaderService:LoaderService) {
     this.date=Observable.create((o)=>{o.next(dateProvider.date);});
    }
 
