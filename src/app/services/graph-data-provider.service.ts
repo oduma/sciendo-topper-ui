@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { EntryTimeLine } from '../models/entry-time-line';
-import { map, take, distinct } from 'rxjs/operators';
+import { map, take, distinct, tap } from 'rxjs/operators';
 import {DataForChart } from '../models/chart-data-series';
 import { PositionAtDate } from '../models/position-at-date';
 import { ChartDataSets } from 'chart.js';
@@ -27,7 +27,6 @@ export class GraphDataProviderService {
    }
    
    private processEntryWithEvolution(entryTimeLine:EntryTimeLine, sortedDates:string[]):ChartDataSets{
-
     let chartDataSet:ChartDataSets={label:"",data: []};
     sortedDates.map((currentDate)=>{
             let foundEntryTimeLine = entryTimeLine.positionAtDates.find((val: PositionAtDate)=>val.date===currentDate);
@@ -64,6 +63,9 @@ export class GraphDataProviderService {
     });
 
     from(entriesTimelines).pipe(
+      tap((r)=>{
+        console.log("In the graph data provider service...");
+      }),
        map((entryTimeLine:EntryTimeLine)=>{
            return this.processEntryWithEvolution(entryTimeLine,distinctSortedDates)
        })).subscribe((val)=>result.dataSeries.push(val));

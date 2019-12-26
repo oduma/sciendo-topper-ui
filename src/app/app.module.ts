@@ -23,6 +23,13 @@ import { GraphModalComponent } from './graph-modal/graph-modal.component';
 import { LoaderService } from './services/loader.service';
 import { InterceptorService } from './services/interceptor.service';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { DateProvider } from './services/date-provider';
+import { RepositoryService } from './services/repository-service';
+import { DailySituationService } from './services/daily-situation-service';
+import { EntrySelectorService } from './services/entry-selector-service';
+import { EnvironmentUrlService } from './services/environment-url-service.service';
+import { GraphDataProviderService } from './services/graph-data-provider.service';
+import { OverallSituationService } from './services/overall-situation-service';
 
 @NgModule({
   declarations: [
@@ -65,6 +72,14 @@ import { SpinnerComponent } from './spinner/spinner.component';
     RouterModule
   ],
   providers: [
+    DateProvider,
+    RepositoryService,
+    DailySituationService,
+    EntrySelectorService,
+    EnvironmentUrlService,
+    GraphDataProviderService,
+    InterceptorService,
+    OverallSituationService,
     LoaderService,
     {
       provide: HTTP_INTERCEPTORS,

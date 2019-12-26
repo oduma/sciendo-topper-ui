@@ -1,7 +1,7 @@
 import {Injectable, ɵisDefaultChangeDetectionStrategy} from '@angular/core';
 import { EntrySelect } from '../models/entry-select';
 import { Observable, Subject } from 'rxjs';
-import {map, scan} from 'rxjs/operators';
+import {map, scan, tap} from 'rxjs/operators';
 
 interface ISelectedItemsOperation extends Function {
     (selectItems: EntrySelect[]): EntrySelect[];
@@ -38,13 +38,16 @@ export class EntrySelectorService {
             .subscribe(this.create);
         
         this.delete.pipe(
+            tap((r)=>{
+                console.log(r);
+            }),
             map(
                 function(entrySelect:EntrySelect):ISelectedItemsOperation{
                     return(selectedItems: EntrySelect[])=>{
                         let elementNo: number=-1;
                         for(let i=0;i<selectedItems.length-1 || elementNo==-1; i++)
                         {
-                            if(selectedItems[i].entryName===entrySelect.entryName)
+                            if((<EntrySelect> selectedItems[i]).entryName===entrySelect.entryName)
                                 elementNo=i;
                         }
                         let firstSlice: EntrySelect[]= selectedItems.slice(0,elementNo);
@@ -66,8 +69,8 @@ export class EntrySelectorService {
         }
         else
         {
-            console.log("in the handle Event");
-            this.deleteEntry({entryName:e.target.entryName,selected:true})
+            console.log("in the handle Event: ", e.target.id);
+            this.deleteEntry({entryName:e.target.id,selected:true})
         }
     }
 
