@@ -15,8 +15,8 @@ import { EntrySelect } from '../models/entry-select';
   styleUrls: ['./graph-display.component.css']
 })
 export class GraphDisplayComponent implements OnInit {
-  lineChartData: ChartDataSets[]=[];
-  lineChartLabels: Label[] = [];
+  lineChartData: ChartDataSets[]=[{label:"aaa",data:[1]}];
+  lineChartLabels: Label[] = ["aaa"];
   lineChartOptions = {
     responsive: true,
   };
@@ -36,7 +36,8 @@ export class GraphDisplayComponent implements OnInit {
     })).subscribe((val)=>{
       var dataForChart:DataForChart=this.graphDataProvider.plotEntries(val);
       this.lineChartLabels=dataForChart.timeLineMilestones;
-      this.lineChartData=dataForChart.dataSeries;
+      this.lineChartData=<ChartDataSets[]>dataForChart.dataSeries;
+      console.log("maybe here: ", this.lineChartData);
       this.lineChartColors=dataForChart.chartColors;
     }    
   
