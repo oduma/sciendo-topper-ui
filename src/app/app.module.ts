@@ -30,6 +30,7 @@ import { EntrySelectorService } from './services/entry-selector-service';
 import { EnvironmentUrlService } from './services/environment-url-service.service';
 import { GraphDataProviderService } from './services/graph-data-provider.service';
 import { OverallSituationService } from './services/overall-situation-service';
+import { SelectionMadeService } from './services/selection-made.service';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { OverallSituationService } from './services/overall-situation-service';
     GraphDataProviderService,
     InterceptorService,
     OverallSituationService,
+    SelectionMadeService,
     LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
