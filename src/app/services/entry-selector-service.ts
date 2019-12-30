@@ -1,4 +1,4 @@
-import {Injectable, ɵisDefaultChangeDetectionStrategy} from '@angular/core';
+import {Injectable} from '@angular/core';
 import { EntrySelect } from '../models/entry-select';
 import { Observable, Subject } from 'rxjs';
 import {map, scan, tap} from 'rxjs/operators';
@@ -6,7 +6,9 @@ import {map, scan, tap} from 'rxjs/operators';
 interface ISelectedItemsOperation extends Function {
     (selectItems: EntrySelect[]): EntrySelect[];
   }
+
 const initialItems: EntrySelect[]=[];
+
 @Injectable({providedIn:'root'})
 @Injectable()
 export class EntrySelectorService {
@@ -19,9 +21,9 @@ export class EntrySelectorService {
     
     constructor(){
         this.selectedItems = this.updates.pipe(
-        scan((selectedItems: EntrySelect[],
+        scan((items: EntrySelect[],
                operation: ISelectedItemsOperation) => {
-                 return operation(selectedItems);
+                 return operation(items);
                },
               initialItems));
     
@@ -49,7 +51,7 @@ export class EntrySelectorService {
                         {
                             if((<EntrySelect> selectedItems[i]).entryName===entrySelect.entryName)
                                 elementNo=i;
-                        }
+                        }                        
                         let firstSlice: EntrySelect[]= selectedItems.slice(0,elementNo);
                         let secondSlice: EntrySelect[]= selectedItems.slice(elementNo+1);
                         return firstSlice.concat(secondSlice);
@@ -75,19 +77,11 @@ export class EntrySelectorService {
     }
 
     private deleteEntry(entrySelected: EntrySelect){
-        console.log("in the deleteEntry");
+        console.log("in the deleteEntry: ", entrySelected);
         this.newDeSelectedItems.next(entrySelected);
     }
     private addEntry(entrySelected: EntrySelect){
         console.log("in the addEntry");
         this.newSelectedItems.next(entrySelected);
-    }
-
-    clearAll(){
-        this.selectedItems.pipe(map((e:EntrySelect[])=>{
-            e.map((entry:EntrySelect)=>{
-                this.deleteEntry(entry);
-            });
-        }));
     }
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { DateProvider } from '../services/date-provider';
 import { EntrySelectorService } from '../services/entry-selector-service';
 import { LoaderService } from '../services/loader.service';
 import { Subject, Observable } from 'rxjs';
+import { EntrySelect } from '../models/entry-select';
 
 @Component({
   selector: 'app-daily-situation',
@@ -26,8 +27,11 @@ export class DailySituationComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(()=>this.loaderService.isLoading);
-    this.entrySelectorService.clearAll();
+    console.log("initiating again the daily situation...");
     
+  }
+  ngOnDestroy(){
+    console.log("clear the selection");
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import { GraphDataProviderService } from '../services/graph-data-provider.service';
@@ -8,6 +8,7 @@ import { EntrySelectorService } from '../services/entry-selector-service';
 import { RepositoryService } from '../services/repository-service';
 import { EntryTimeLine } from '../models/entry-time-line';
 import { EntrySelect } from '../models/entry-select';
+import { SelectionMadeService } from '../services/selection-made.service';
 
 @Component({
   selector: 'app-graph-display',
@@ -15,8 +16,10 @@ import { EntrySelect } from '../models/entry-select';
   styleUrls: ['./graph-display.component.css']
 })
 export class GraphDisplayComponent implements OnInit {
-  lineChartData: ChartDataSets[]=[{label:"aaa",data:[1]}];
-  lineChartLabels: Label[] = ["aaa"];
+  @Input()
+  dataForChart:DataForChart;
+  lineChartData: ChartDataSets[]=[{label:"Calculating...",data:[0]}];
+  lineChartLabels: Label[] = ["Calculating..."];
   lineChartOptions = {
     responsive: true,
   };
@@ -26,10 +29,8 @@ export class GraphDisplayComponent implements OnInit {
   
   lineChartColors: Color[] = [];
 
-  constructor(private graphDataProvider: GraphDataProviderService, private entrySelectorService:EntrySelectorService,private repositoryService:RepositoryService) {
-    var selectedEntries:EntrySelect[];
-    this.entrySelectorService.selectedItems.subscribe(val=>selectedEntries=val);
-    this.repositoryService.getDataWithParams('api/entries/gettimelines',selectedEntries)
+  constructor(private graphDataProvider: GraphDataProviderService, private repositoryService:RepositoryService, selectionMadeService:SelectionMadeService) {
+    this.repositoryService.getDataWithParams('api/entries/gettimelines',selectionMadeService.Items)
     .pipe(tap((r)=>console.log("from the service: ",r)),
       map(res=>{
         return res as EntryTimeLine[];
