@@ -31,6 +31,7 @@ import { EnvironmentUrlService } from './services/environment-url-service.servic
 import { GraphDataProviderService } from './services/graph-data-provider.service';
 import { OverallSituationService } from './services/overall-situation-service';
 import { SelectionMadeService } from './services/selection-made.service';
+import { ArtistNameComponent } from './artist-name/artist-name.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { SelectionMadeService } from './services/selection-made.service';
     OverallListComponent,
     HistoryListComponent,
     GraphModalComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ArtistNameComponent
   ],
   entryComponents:[
     GraphModalComponent

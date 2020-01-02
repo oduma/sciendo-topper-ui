@@ -1,0 +1,2 @@
+<ng-template #tipContent>{{getInfo()}}<br/><a href="{{getLastFmUrl()}}" target="_blank">More...</a></ng-template>
+<p placement="top" [ngbTooltip]="tipContent" [openDelay]="300" [closeDelay]="1000"><img src="{{artistPicture}}" class="circular-square"/>{{artistName}}</p>

@@ -31,4 +31,9 @@ export class RepositoryService {
         return  this.getDataNoParams(`${route}?name=${routeWithParams}`);
       }
     
+      getDataWithParamsFromLastFm(params: string[]){
+          return this.http.get(this.createCompleteRoute(this.envUrl.lastFmUrlAddress,`?method=artist.getinfo&artist=${params[0]}&api_key=${params[1]}&format=json`))
+      }
+
+    
 }
