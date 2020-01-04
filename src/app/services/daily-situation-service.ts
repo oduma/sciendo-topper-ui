@@ -13,14 +13,13 @@ export class DailySituationService {
     private dateFoundSource= new Subject<string>();
     dateFound$=this.dateFoundSource.asObservable();
 
-    constructor(private repository: RepositoryService, 
-        private dateProvider: DateProvider){
+    constructor(private repository: RepositoryService){
     }
 
-    getDayEntries():Observable<DayEntryEvolution[]>{
+    getDayEntries(initialDate:Date):Observable<DayEntryEvolution[]>{
 
-        let formattedDate: string=`${this.dateProvider.date.getFullYear()}-${this.dateProvider.date.getMonth()+1}-${this.dateProvider.date.getDate()}`;
-        console.log("for date: ", this.dateProvider.date);
+        let formattedDate: string=`${initialDate.getFullYear()}-${initialDate.getMonth()+1}-${initialDate.getDate()}`;
+        console.log("for date: ", initialDate);
         console.log("formatted date: ",formattedDate);
         return this.repository.getDataNoParams(`api/entries/getbydate/${formattedDate}`)
         .pipe(

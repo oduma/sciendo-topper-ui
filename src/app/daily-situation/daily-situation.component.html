@@ -1,9 +1,7 @@
-<h1><span class="badge badge-pill badge-light">
-        {{(date | async) | date : 'dd/MMM/yyyy'}}
-</span></h1>
+<app-today [date]="date | async" [model]="model | async" [initial]="model | async" (onDateChanged)="changedDate($event)"></app-today>
 <div class="container container-fluid">
     <div class="row">
-        <app-daily-list (onDateFound)="foundDate($event)"></app-daily-list>
+        <app-daily-list (onDateFound)="foundDate($event)" [manualDate]="manualDate"></app-daily-list>
     </div>
     <div *ngIf="loaderService.isLoading | async">
         <app-spinner></app-spinner>

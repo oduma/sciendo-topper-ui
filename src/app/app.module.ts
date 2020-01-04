@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {RouterModule} from '@angular/router';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule} from '@angular/forms';
-import {ChartsModule} from 'ng2-charts';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { RouterModule} from '@angular/router';
+import { NgbModule, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule} from '@angular/forms';
+import { ChartsModule} from 'ng2-charts';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { DailySituationComponent } from './daily-situation/daily-situation.component';
@@ -16,7 +16,7 @@ import { EntrySelectorComponent } from './entry-selector/entry-selector.componen
 import { GraphLauncherComponent } from './graph-launcher/graph-launcher.component';
 import { GraphDisplayComponent } from './graph-display/graph-display.component';
 import { PositionComponent } from './position/position.component';
-import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import { AngularFontAwesomeModule} from 'angular-font-awesome';
 import { OverallListComponent } from './overall-list/overall-list.component';
 import { HistoryListComponent } from './history-list/history-list.component';
 import { GraphModalComponent } from './graph-modal/graph-modal.component';
@@ -32,6 +32,9 @@ import { GraphDataProviderService } from './services/graph-data-provider.service
 import { OverallSituationService } from './services/overall-situation-service';
 import { SelectionMadeService } from './services/selection-made.service';
 import { ArtistNameComponent } from './artist-name/artist-name.component';
+import { TodayComponent } from './today/today.component';
+import { ArtistInfoService } from './services/artist-info.service';
+import { NgbDateCustomParserFormatterService } from './services/ngb-date-custom-parser-formatter.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,8 @@ import { ArtistNameComponent } from './artist-name/artist-name.component';
     HistoryListComponent,
     GraphModalComponent,
     SpinnerComponent,
-    ArtistNameComponent
+    ArtistNameComponent,
+    TodayComponent
   ],
   entryComponents:[
     GraphModalComponent
@@ -61,6 +65,7 @@ import { ArtistNameComponent } from './artist-name/artist-name.component';
     FormsModule,
     ChartsModule,
     HttpClientModule,
+    
     RouterModule.forRoot([
       {path:'daily', component:DailySituationComponent},
       {path:'overall', component:OverallSituationComponent},
@@ -84,11 +89,16 @@ import { ArtistNameComponent } from './artist-name/artist-name.component';
     InterceptorService,
     OverallSituationService,
     SelectionMadeService,
+    ArtistInfoService,
     LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass:InterceptorService,
       multi:true
+    },
+    {
+      provide:NgbDateParserFormatter,
+      useClass:NgbDateCustomParserFormatterService
     }
   ],
   bootstrap: [AppComponent]
