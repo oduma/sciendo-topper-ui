@@ -30,7 +30,6 @@ export class DailySituationComponent implements OnInit {
    changedDate(date:NgbDate){
      let tempDate: Date= new Date(date.year,date.month, date.day);
      this.date=Observable.create((o)=>{o.next(tempDate);o.complete();});
-     this.dateProvider.date=tempDate;
      this.manualDate=tempDate;
    }
 

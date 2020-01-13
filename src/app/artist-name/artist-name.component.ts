@@ -10,7 +10,8 @@ export class ArtistNameComponent implements OnInit {
 
   @Input()
   artistName:string;
-  artistPicture:string;
+  @Input()
+  artistPictureUrl:string;
   private artistInfo:string;
   private artistLastFmUrl:string;
   constructor(public artistInfoService:ArtistInfoService) {
@@ -35,8 +36,6 @@ export class ArtistNameComponent implements OnInit {
     return this.artistLastFmUrl;
   }
   ngOnInit() {
-    this.artistPicture=this.artistInfoService.getPicture();
-    //this.artistLastFmUrl=this.artistInfoService.getLastFmUrl(this.artistName);
 
   }
 
