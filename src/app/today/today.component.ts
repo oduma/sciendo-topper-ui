@@ -24,6 +24,7 @@ export class TodayComponent implements OnInit {
   }
 
   onDateSelection(date){
+    console.log("changed date drom control: ", date);
     this.onDateChanged.emit(date);
   }
 }
