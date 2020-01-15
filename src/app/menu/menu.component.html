@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" [routerLink]="['/daily']"
+    <a class="navbar-brand" [routerLink]="['/daily',dateProvider.executingDate]"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">Daily</a>
     <a class="navbar-brand" [routerLink]="['/overall']"

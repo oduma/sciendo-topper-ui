@@ -5,7 +5,8 @@
             placeholder="dd-mm-yyyy"
             name="dp" 
             [(ngModel)]="model" 
-            [maxDate]="initial" 
+            [maxDate]="toDate"
+            [minDate]="fromDate" 
             (dateSelect)="onDateSelection($event)"
             ngbDatepicker 
             #d="ngbDatepicker">

@@ -23,8 +23,8 @@ export class OverallListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let currentYear:number=this.dateProvider.date.getFullYear();
-    this.overallEntries=this.overallSituationService.getOverallEntries(currentYear);
+    //let currentYear:number=this.dateProvider.loadDate(this.dateProvider.executingDate);
+    //this.overallEntries=this.overallSituationService.getOverallEntries(currentYear);
 
   }
 

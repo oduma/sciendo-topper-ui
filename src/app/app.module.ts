@@ -67,12 +67,12 @@ import { NgbDateCustomParserFormatterService } from './services/ngb-date-custom-
     HttpClientModule,
     
     RouterModule.forRoot([
-      {path:'daily', component:DailySituationComponent},
+      {path:'daily/:today', component:DailySituationComponent},
       {path:'overall', component:OverallSituationComponent},
       {path:'history/:year',component:HistoryComponent},
       {path: 'admin', component:AdminComponent},
       {path: 'graph', component:GraphDisplayComponent},
-      {path: '', redirectTo:'/daily', pathMatch: 'full'}
+      {path: '', redirectTo:'/admin', pathMatch: 'full'}
     ]),
     AngularFontAwesomeModule
   ],

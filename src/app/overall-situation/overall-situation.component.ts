@@ -15,7 +15,7 @@ export class OverallSituationComponent implements OnInit {
   constructor(private dateProvider: DateProvider,
      private entrySelectorService:EntrySelectorService,
      public loaderService: LoaderService) {
-    this.date=dateProvider.date;
+    //this.date=dateProvider.date;
   }
 
   ngOnInit() {

@@ -16,15 +16,11 @@ export class DailySituationService {
     constructor(private repository: RepositoryService){
     }
 
-    getDayEntries(initialDate:Date):Observable<DayEntryEvolution[]>{
+    getDayEntries(initialDate:string):Observable<DayEntryEvolution[]>{
 
-        let formattedDate: string=`${initialDate.getFullYear()}-${initialDate.getMonth()+1}-${initialDate.getDate()}`;
         console.log("for date: ", initialDate);
-        console.log("formatted date: ",formattedDate);
-        return this.repository.getDataNoParams(`api/entries/getbydate/${formattedDate}`)
+        return this.repository.getDataNoParams(`api/entries/getbydate/${initialDate}`)
         .pipe(
-            tap((r)=>this.dateFoundSource.next(r[0].date)),
-            tap((r)=>console.log("going to server from daily list: ", r)),
             map(res=>{
             return res as DayEntryEvolution[]
         }));

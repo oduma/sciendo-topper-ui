@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DateProvider } from '../services/date-provider';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
@@ -8,11 +10,13 @@ import { DateProvider } from '../services/date-provider';
 })
 export class MenuComponent implements OnInit {
   lastYear:number;
-  constructor(dateProvider: DateProvider) {
-    this.lastYear=dateProvider.date.getFullYear()-1;
+  constructor(public dateProvider: DateProvider) {
+    //this.lastYear=dateProvider.loadDate(dateProvider.executingDate).year-1;
    }
 
   ngOnInit() {
+    console.log("in menu constructor: ", this.dateProvider.executingDate);
+
   }
 
 }

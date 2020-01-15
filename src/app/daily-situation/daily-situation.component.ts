@@ -3,6 +3,8 @@ import { DateProvider } from '../services/date-provider';
 import { LoaderService } from '../services/loader.service';
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-daily-situation',
@@ -10,30 +12,14 @@ import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./daily-situation.component.css']
 })
 export class DailySituationComponent implements OnInit {
-  date: Observable<Date>;
+  executingDate: Observable<string>;
   model:Observable<NgbDateStruct>;
   manualDate: Date;
   
-  constructor(private dateProvider:DateProvider, 
+  constructor(dateProvider:DateProvider, route:ActivatedRoute, 
     public loaderService:LoaderService) {
-      console.log("In constructor the date is: ", dateProvider.date)
-    this.date=Observable.create((o)=>{o.next(dateProvider.date);});
-    this.model=Observable.create((o)=>{o.next({day:dateProvider.date.getDate(),month:dateProvider.date.getMonth(),year:dateProvider.date.getFullYear()});});
-   }
-
-   foundDate(event$){
-     let tempDate: Date=new Date(event$);
-     console.log("In the finder the month is: ", tempDate.getMonth());
-     this.date=Observable.create((o)=>{o.next(tempDate);o.complete();});
-     this.model=Observable.create((o)=>{o.next({day:tempDate.getDate(),month:tempDate.getMonth()+1,year:tempDate.getFullYear()});});
-
-   }
-
-   changedDate(date:NgbDate){
-     let tempDate: Date= new Date(date.year,date.month-1, date.day);
-     console.log("Changed date to: ", tempDate);
-     this.date=Observable.create((o)=>{o.next(tempDate);o.complete();});
-     this.manualDate=tempDate;
+      this.executingDate=route.params.pipe(map(p=>{return p["today"]}));
+      this.model=this.executingDate.pipe(map((s)=>{return  dateProvider.loadDate(s)}));
    }
 
   ngOnInit() {
