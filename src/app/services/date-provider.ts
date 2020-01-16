@@ -10,10 +10,11 @@ import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 @Injectable({
     providedIn:'root'
 })
-//@Injectable()
+@Injectable()
 export class DateProvider {
     absoluteTimeInterval: Observable<TimeInterval>;
     public executingDate:string;
+    lastYear:string;
     constructor(private repositoryService: RepositoryService){
         this.absoluteTimeInterval = this.repositoryService.getDataNoParams("api/entries/gettimeinterval")
         .pipe(
@@ -21,10 +22,11 @@ export class DateProvider {
             map(res=>{
             return res as TimeInterval;
         }));
-//        this.executingDate = this.absoluteTimeInterval.pipe(map((d)=>{return d.toDate}));
-        this.absoluteTimeInterval.subscribe((d)=>{this.executingDate =  d.toDate});
-
-}
+        this.absoluteTimeInterval.subscribe((d)=>{
+            this.executingDate =  d.toDate;
+            this.lastYear=d.toDate.split("-")[0];
+        });
+    }
 
     public loadDate(newDate: string):NgbDateStruct{
             const dateParts=newDate.trim().split('-');

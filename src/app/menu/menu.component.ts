@@ -11,7 +11,6 @@ import { tap } from 'rxjs/operators';
 export class MenuComponent implements OnInit {
   lastYear:number;
   constructor(public dateProvider: DateProvider) {
-    //this.lastYear=dateProvider.loadDate(dateProvider.executingDate).year-1;
    }
 
   ngOnInit() {

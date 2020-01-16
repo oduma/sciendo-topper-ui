@@ -1,9 +1,9 @@
 <h1><span class="badge badge-pill badge-light">
-        {{date | date : 'yyyy'}}
+        {{thisYear}}
 </span></h1>
 <div class="container-fluid">
     <div class="row">
-        <app-overall-list></app-overall-list>
+        <app-overall-list [thisYear]="thisYear"></app-overall-list>
     </div>
     <div *ngIf="loaderService.isLoading | async">
         <app-spinner></app-spinner>

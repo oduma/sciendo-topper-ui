@@ -1,4 +1,4 @@
-export interface TimeInterval {
+export class TimeInterval {
     fromDate: string;
     toDate:string;
 }

@@ -17,7 +17,6 @@ export class HistoryComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private router:Router,
     public loaderService: LoaderService) {
-      this.currentYear=activeRoute.snapshot.params['year'];
    }
 
   ngOnInit() {

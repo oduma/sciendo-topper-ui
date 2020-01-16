@@ -10,7 +10,7 @@
     <tbody>
         <tr class = "big-text" *ngFor="let historyEntry of historyEntries | async">
                 <td>{{historyEntry.currentOverallPosition.rank}}</td>
-                <td class="big-text"><app-artist-name [artistName]="historyEntry.name"></app-artist-name></td>
+                <td class="big-text"><app-artist-name [artistName]="historyEntry.name"  [artistPictureUrl]="historyEntry.pictureUrl"></app-artist-name></td>
                 <td class="big-text">{{historyEntry.currentOverallPosition.score}}</td>
                 <td class="big-text">{{historyEntry.currentOverallPosition.noOfLovedTracks}}</td>
         </tr>

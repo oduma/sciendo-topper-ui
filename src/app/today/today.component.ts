@@ -27,7 +27,10 @@ export class TodayComponent implements OnInit {
 
   onDateSelection(ngbDate:NgbDate){
     this.dateProvider.executingDate = this.dateProvider.format(new Date(ngbDate.year,ngbDate.month-1,ngbDate.day));
-    console.log("from the event in the date control: ",this.dateProvider.executingDate);
-    this.router.navigate(['/daily',this.dateProvider.executingDate]);
+    this.router.navigate(['/daily',this.dateProvider.executingDate]).then((res)=>{
+      if(res){
+        window.location.reload();
+      }
+    });
   }
 }

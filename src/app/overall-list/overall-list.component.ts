@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OverallEntry } from '../models/overall-entry';
 import { OverallSituationService } from '../services/overall-situation-service';
@@ -12,7 +12,8 @@ import {Position} from '../models/position';
 })
 export class OverallListComponent implements OnInit {
   overallEntries: Observable<OverallEntry[]>;
-
+  @Input()
+  thisYear:string;
   constructor(public overallSituationService: OverallSituationService, private dateProvider:DateProvider) {
    }
 
@@ -23,8 +24,7 @@ export class OverallListComponent implements OnInit {
   }
 
   ngOnInit() {
-    //let currentYear:number=this.dateProvider.loadDate(this.dateProvider.executingDate);
-    //this.overallEntries=this.overallSituationService.getOverallEntries(currentYear);
+    this.overallEntries=this.overallSituationService.getOverallEntries(Number(this.thisYear));
 
   }
 

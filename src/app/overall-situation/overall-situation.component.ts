@@ -11,14 +11,14 @@ import { EntrySelect } from '../models/entry-select';
   styleUrls: ['./overall-situation.component.css']
 })
 export class OverallSituationComponent implements OnInit {
-  date: Date;
+  thisYear:string;
   constructor(private dateProvider: DateProvider,
      private entrySelectorService:EntrySelectorService,
      public loaderService: LoaderService) {
-    //this.date=dateProvider.date;
   }
 
   ngOnInit() {
+    this.thisYear=this.dateProvider.executingDate.split("-")[0];
     setTimeout(()=>this.loaderService.isLoading);
 
   }

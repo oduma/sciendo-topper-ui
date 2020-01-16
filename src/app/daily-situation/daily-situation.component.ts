@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy,OnChanges } from '@angular/core';
 import { DateProvider } from '../services/date-provider';
 import { LoaderService } from '../services/loader.service';
 import { Observable } from 'rxjs';
@@ -12,20 +12,20 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./daily-situation.component.css']
 })
 export class DailySituationComponent implements OnInit {
-  executingDate: Observable<string>;
   model:Observable<NgbDateStruct>;
   manualDate: Date;
   
   constructor(dateProvider:DateProvider, route:ActivatedRoute, 
     public loaderService:LoaderService) {
-      this.executingDate=route.params.pipe(map(p=>{return p["today"]}));
-      this.model=this.executingDate.pipe(map((s)=>{return  dateProvider.loadDate(s)}));
+      this.model=route.params.pipe(map(p=>{return dateProvider.loadDate(p["today"]);}));
    }
 
   ngOnInit() {
     setTimeout(()=>this.loaderService.isLoading);
-    console.log("initiating again the daily situation...");
     
+  }
+  ngOnChanges(){
+    console.log("in the daily dist onchanges");
   }
   ngOnDestroy(){
     console.log("clear the selection");
