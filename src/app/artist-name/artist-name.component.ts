@@ -35,6 +35,18 @@ export class ArtistNameComponent implements OnInit {
     }
     return this.artistLastFmUrl;
   }
+
+  getImageUrl():string{
+    if(this.isPicturePlaceholder()) {
+      return `https://www.google.com/search?q=${this.artistName}&tbm=isch`;
+    }
+    return this.artistPictureUrl;
+  }
+
+  private isPicturePlaceholder():boolean{
+    return this.artistPictureUrl.endsWith("artist-placeholder.png");
+
+  }
   ngOnInit() {
 
   }
