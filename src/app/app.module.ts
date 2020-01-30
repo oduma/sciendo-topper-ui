@@ -35,6 +35,8 @@ import { ArtistNameComponent } from './artist-name/artist-name.component';
 import { TodayComponent } from './today/today.component';
 import { ArtistInfoService } from './services/artist-info.service';
 import { NgbDateCustomParserFormatterService } from './services/ngb-date-custom-parser-formatter.service';
+import { HttpClientService } from './services/http-client.service';
+import { CacheService } from './services/cache.service';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { NgbDateCustomParserFormatterService } from './services/ngb-date-custom-
     OverallSituationService,
     SelectionMadeService,
     ArtistInfoService,
+    HttpClientService,
+    CacheService,
     LoaderService,
     {
       provide: HTTP_INTERCEPTORS,

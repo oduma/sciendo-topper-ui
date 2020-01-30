@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import { EnvironmentUrlService } from './environment-url-service.service';
 import { EntrySelect } from '../models/entry-select';
+import { Observable } from 'rxjs';
+import { HttpClientService } from './http-client.service';
 @Injectable({
     providedIn:'root'
 })
@@ -9,7 +10,7 @@ import { EntrySelect } from '../models/entry-select';
 export class RepositoryService {
 
     
-    constructor(private http: HttpClient, private envUrl:EnvironmentUrlService){
+    constructor(private http: HttpClientService, private envUrl:EnvironmentUrlService){
 
     }
 
@@ -21,19 +22,17 @@ export class RepositoryService {
     }
 
 
-    getDataNoParams(route: string){
-        return this.http.get(this.createCompleteRoute(this.envUrl.urlAddress,route));
+    getDataNoParams<T>(route: string):Observable<T>{
+        return this.http.get<T>({url:this.createCompleteRoute(this.envUrl.urlAddress,route), cacheMins:10});
     }
 
-    getDataWithParams(route: string, entries: EntrySelect[]) {
+    getDataWithParams<T>(route: string, entries: EntrySelect[]):Observable<T> {
         var routeWithParams:string;
         routeWithParams=entries.map(e=>encodeURIComponent(e.entryName)).join('&name=');
-        return  this.getDataNoParams(`${route}?name=${routeWithParams}`);
+        return  this.getDataNoParams<T>(`${route}?name=${routeWithParams}`);
       }
     
-      getDataWithParamsFromLastFm(params: string[]){
-          return this.http.get(this.createCompleteRoute(this.envUrl.lastFmUrlAddress,`?method=artist.getinfo&artist=${params[0]}&api_key=${params[1]}&format=json`))
-      }
-
-    
+    getDataWithParamsFromLastFm<T>(params: string[]):Observable<T>{
+          return this.http.get<T>({url:this.createCompleteRoute(this.envUrl.lastFmUrlAddress,`?method=artist.getinfo&artist=${params[0]}&api_key=${params[1]}&format=json`), cacheMins:5});
+    }
 }

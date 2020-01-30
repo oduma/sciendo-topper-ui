@@ -13,17 +13,11 @@ export class OverallSituationService {
     }
 
     getOverallEntries(forYear:number):Observable<OverallEntryEvolution[]>{
-        return this.repository.getDataNoParams(`api/entries/getbyyear/${forYear}`)
-        .pipe(map(res=>{
-            return res as OverallEntryEvolution[]
-        }));
+        return this.repository.getDataNoParams<OverallEntryEvolution[]>(`api/entries/getbyyear/${forYear}`);
     }
 
     getOverallEntriesWithouEvolution(forYear:number):Observable<OverallEntry[]>{
-        return this.repository.getDataNoParams(`api/entries/getbyyearwithoutevolution/${forYear}`)
-        .pipe(map(res=>{
-            return res as OverallEntry[]
-        }));
+        return this.repository.getDataNoParams<OverallEntry[]>(`api/entries/getbyyearwithoutevolution/${forYear}`);
 
     }
 }

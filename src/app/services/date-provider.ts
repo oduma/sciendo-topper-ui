@@ -16,12 +16,7 @@ export class DateProvider {
     public executingDate:string;
     lastYear:string;
     constructor(private repositoryService: RepositoryService){
-        this.absoluteTimeInterval = this.repositoryService.getDataNoParams("api/entries/gettimeinterval")
-        .pipe(
-            tap((r)=>console.log("dateprovider went to the server: ", r)),
-            map(res=>{
-            return res as TimeInterval;
-        }));
+        this.absoluteTimeInterval = this.repositoryService.getDataNoParams<TimeInterval>("api/entries/gettimeinterval");
         this.absoluteTimeInterval.subscribe((d)=>{
             this.executingDate =  d.toDate;
             this.lastYear=d.toDate.split("-")[0];
@@ -45,9 +40,6 @@ export class DateProvider {
     
     getHistoryYears():Observable<number[]>
     {
-        return this.repositoryService.getDataNoParams('api/admin')
-        .pipe(map(res=>{
-            return res as number[]
-        }));
+        return this.repositoryService.getDataNoParams<number[]>('api/admin');
     }
 }

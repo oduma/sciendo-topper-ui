@@ -37,12 +37,8 @@ export class GraphDisplayComponent implements OnInit {
     this.loadClassesAvailable();
     var tempName:string;
     var index:number=0;
-    var baseEntries:EntryBase[];
-    this.repositoryService.getDataWithParams('api/entries/gettimelines',selectionMadeService.Items)
-    .pipe(tap((r)=>console.log("from the service: ",r)),
-      map(res=>{
-        return res as EntryTimeLine[];
-    })).subscribe((val:EntryTimeLine[])=>{
+    this.repositoryService.getDataWithParams<EntryTimeLine[]>('api/entries/gettimelines',selectionMadeService.Items)
+    .subscribe((val:EntryTimeLine[])=>{
       this.legendItems=val.map((e)=>{
         if(e.name!=tempName)
         {

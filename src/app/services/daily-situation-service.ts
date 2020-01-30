@@ -19,11 +19,7 @@ export class DailySituationService {
     getDayEntries(initialDate:string):Observable<DayEntryEvolution[]>{
 
         console.log("for date: ", initialDate);
-        return this.repository.getDataNoParams(`api/entries/getbydate/${initialDate}`)
-        .pipe(
-            map(res=>{
-            return res as DayEntryEvolution[]
-        }));
+        return this.repository.getDataNoParams<DayEntryEvolution[]>(`api/entries/getbydate/${initialDate}`);
 
     }
 

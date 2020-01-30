@@ -19,9 +19,7 @@ export class ArtistInfoService {
     return "assets/artist-placeholder.png";
   }
   getInfo(artistName: string){
-    this.lastFmArtist=this.repositoryService.getDataWithParamsFromLastFm([artistName,"67b6145c521d4ca0e31ef35c3032d320"]).
-    pipe(tap((r:LastFmArtist)=>{console.log("from last fm:", r.artist.bio.summary)}),
-    map((res:LastFmArtist)=>{return res}));
+    this.lastFmArtist=this.repositoryService.getDataWithParamsFromLastFm<LastFmArtist>([artistName,"67b6145c521d4ca0e31ef35c3032d320"]);
   }
 
   getLastFmUrl(artistName: string){
