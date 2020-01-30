@@ -14,11 +14,11 @@ import { ActivatedRoute } from '@angular/router';
 export class DailyListComponent implements OnInit {
   dayEntries: Observable<DayEntryEvolution[]>;
   private executingDate:string;
-  
+  orange64px:string;  
   constructor(public dailySituationService: DailySituationService, private dateProvider:DateProvider,private route:ActivatedRoute) {
     route.params.subscribe((p)=>this.executingDate=p["today"]);
-    console.log("in the list constructor: ", this.executingDate);
-   }
+    this.orange64px="orange-64px";
+  }
 
    getRank(position: Position):number{
      if(position==null)

@@ -12,9 +12,13 @@ export class ArtistNameComponent implements OnInit {
   artistName:string;
   @Input()
   artistPictureUrl:string;
+  @Input()
+  colorAndSizeClassForPicture: string;
+  currentClass:string;
   private artistInfo:string;
   private artistLastFmUrl:string;
   constructor(public artistInfoService:ArtistInfoService) {
+    this.currentClass=`circular square ${this.colorAndSizeClassForPicture}`;
    }
 
   getInfo():string{
@@ -48,7 +52,8 @@ export class ArtistNameComponent implements OnInit {
 
   }
   ngOnInit() {
-
+    this.currentClass=`circular-square ${this.colorAndSizeClassForPicture}`;
+    console.log("color and size in artist name:" ,this.colorAndSizeClassForPicture);
   }
 
 }

@@ -1,3 +1,9 @@
+<div *ngIf="legendItems">
+<ul>
+    <li *ngFor="let legendItem of legendItems">
+        &nbsp;<app-artist-name [artistName]="legendItem.name" [artistPictureUrl]="legendItem.pictureUrl" [colorAndSizeClassForPicture]="legendItem.colorAndSizeClass"></app-artist-name>
+    </li>
+</ul>   
 <div class="chart-wrapper">
     <canvas baseChart 
         [datasets]="lineChartData" 

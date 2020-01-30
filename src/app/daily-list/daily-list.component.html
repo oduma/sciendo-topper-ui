@@ -21,7 +21,7 @@
                     [currentEntryRank]="getRank(dayEntry.currentDayPosition)" 
                     [previousEntryRank]="getRank(dayEntry.previousDayPosition)"></app-position>
                 </td>
-                <td class="big-text"><app-artist-name [artistName]="dayEntry.name" [artistPictureUrl]="dayEntry.pictureUrl"></app-artist-name></td>
+                <td class="big-text"><app-artist-name [artistName]="dayEntry.name" [artistPictureUrl]="dayEntry.pictureUrl" [colorAndSizeClassForPicture]="orange64px"></app-artist-name></td>
                 <td class="big-text">{{dayEntry.currentDayPosition.hits}}</td>
                 <td class="big-text">{{dayEntry.currentDayPosition.noOfLovedTracks}}</td>
                 <td class="big-text">{{dayEntry.currentDayPosition.score}}</td>

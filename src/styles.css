@@ -1,3 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
 @import url("../node_modules/font-awesome/css/font-awesome.min.css");
+
+.orange-64px{
+    border-color: orange;
+    width: 64px;
+    height: 64px;
+}
+.cs-fa4dc3-32px{
+    border-color: #fa4dc3;
+    width: 32px;
+    height: 32px;
+
+}
+.cs-aed1fc-32px{
+    border-color: #aed1fc;
+    width: 32px;
+    height: 32px;
+
+}
+.cs-fa9c43-32px{
+    border-color: #fa9c43;
+    width: 32px;
+    height: 32px;
+
+}
+.cs-fa98eb-32px{
+    border-color: #fa98eb;
+    width: 32px;
+    height: 32px;
+
+}
+.cs-red-32px{
+    border-color: red;
+    width: 32px;
+    height: 32px;
+
+}
+.cs-96bf0d-32px{
+    border-color: #96bf0d;
+    width: 32px;
+    height: 32px;
+
+}
+.cs-3ac2c7-32px{
+    border-color: #3ac2c7;
+    width: 32px;
+    height: 32px;
+
+}

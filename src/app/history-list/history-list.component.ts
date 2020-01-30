@@ -12,8 +12,12 @@ export class HistoryListComponent implements OnInit {
   historyEntries: Observable<OverallEntry[]>;
   @Input() 
   currentYear:number;
+  orange64px: string;
 
-  constructor(public overallSituationService:OverallSituationService) { }
+  constructor(public overallSituationService:OverallSituationService) { 
+    this.orange64px="orange-64px";
+
+  }
 
   ngOnInit() {
     this.historyEntries=this.overallSituationService.getOverallEntriesWithouEvolution(this.currentYear);

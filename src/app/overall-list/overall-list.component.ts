@@ -14,7 +14,10 @@ export class OverallListComponent implements OnInit {
   overallEntries: Observable<OverallEntry[]>;
   @Input()
   thisYear:string;
+  orange64px: string;
   constructor(public overallSituationService: OverallSituationService, private dateProvider:DateProvider) {
+    this.orange64px="orange-64px";
+
    }
 
    getRank(position: Position):number{
