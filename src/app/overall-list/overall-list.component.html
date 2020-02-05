@@ -1,4 +1,5 @@
-<table class="table table-bordered table-striped table-xl">
+<div *ngIf="overallEntries$ | async as overallEntries">
+<table class="table table-bordered table-striped table-xl" *ngIf="overallEntries.length > 0">
         <thead class="table-dark">
             <tr>
                 <th scope="col">Select</th>
@@ -22,4 +23,8 @@
             </tr>
         </tbody>
     </table>
+    <div *ngIf="overallEntries.length <= 0">
+        No entries for {{thisYear}}
+    </div>    
+</div>
     

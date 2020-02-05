@@ -63,9 +63,6 @@ export class GraphDataProviderService {
     });
 
     from(entriesTimelines).pipe(
-      tap((r)=>{
-        console.log("In the graph data provider service...");
-      }),
        map((entryTimeLine:EntryTimeLine)=>{
            return this.processEntryWithEvolution(entryTimeLine,distinctSortedDates)
        })).subscribe((val)=>result.dataSeries.push(val));

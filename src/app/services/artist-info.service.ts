@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { RepositoryService } from './repository-service';
-import { tap, map } from 'rxjs/operators';
-import { error } from 'util';
 import { LastFmArtist } from '../models/last-fm-artist';
 import { Observable } from 'rxjs';
+import { ServerConfigProviderService } from './server-config-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +11,18 @@ export class ArtistInfoService {
 
   lastFmArtist:Observable<LastFmArtist>;
 
-  constructor(private repositoryService:RepositoryService) {
+  constructor(private repositoryService:RepositoryService, private serverConfigProvider:ServerConfigProviderService) {
    }
 
   getPicture(){
-    return "assets/artist-placeholder.png";
+    return this.serverConfigProvider.serverConfig.relativeDefaultImagePath;
   }
   getInfo(artistName: string){
-    this.lastFmArtist=this.repositoryService.getDataWithParamsFromLastFm<LastFmArtist>([artistName,"67b6145c521d4ca0e31ef35c3032d320"]);
+    this.lastFmArtist=this.repositoryService.getDataWithParamsFromLastFm<LastFmArtist>([artistName,this.serverConfigProvider.serverConfig.lastFmAppKey]);
   }
 
   getLastFmUrl(artistName: string){
     var name:string=encodeURIComponent(artistName);
-    return `https://www.last.fm/music/${name}`;
+    return `${this.serverConfigProvider.serverConfig.lastFmRootUrl}${name}`;
   }
 }

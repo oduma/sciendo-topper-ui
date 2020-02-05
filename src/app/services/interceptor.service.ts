@@ -20,7 +20,6 @@ export class InterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("server request going out...");
     this.requests.push(req);
     this.loaderService.isLoading.next(true);
     return Observable.create(observer => {

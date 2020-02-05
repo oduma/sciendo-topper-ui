@@ -5,7 +5,7 @@ import { environment } from './../../environments/environment';
   providedIn: 'root'
 })
 export class EnvironmentUrlService {
-  public urlAddress: string=environment.urlAddress;
-  public lastFmUrlAddress: string = environment.lastFmUrlAddress;
+  urlAddress: string=environment.urlAddress;
+  lastFmUrlAddress: string = environment.lastFmUrlAddress;
   constructor() { }
 }

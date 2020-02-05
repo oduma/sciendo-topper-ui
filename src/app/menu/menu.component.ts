@@ -9,13 +9,28 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  lastYear:number;
+  lastYear:string;
+  executingDate: string;
   constructor(public dateProvider: DateProvider) {
    }
 
   ngOnInit() {
-    console.log("in menu constructor: ", this.dateProvider.executingDate);
+    if(this.dateProvider.executingDate==null){
+      let today: Date=new Date();
+      if(today.getHours()<this.dateProvider.refreshHour)
+        this.executingDate=this.dateProvider.format(new Date(today.getTime()-24*60*60*1000));
+      else
+        this.executingDate=this.dateProvider.format(today);
 
+    }
+    else{
+      this.executingDate=this.dateProvider.executingDate;
+    }
+    if(this.dateProvider.lastYear==null){
+      this.lastYear=((new Date()).getFullYear()).toString();
+    }
+    else{
+      this.lastYear=this.dateProvider.lastYear;
+    }
   }
-
 }

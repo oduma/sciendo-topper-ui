@@ -24,11 +24,4 @@ export class DailySituationComponent implements OnInit {
     setTimeout(()=>this.loaderService.isLoading);
     
   }
-  ngOnChanges(){
-    console.log("in the daily dist onchanges");
-  }
-  ngOnDestroy(){
-    console.log("clear the selection");
-  }
-
 }

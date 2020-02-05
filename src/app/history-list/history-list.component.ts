@@ -24,7 +24,6 @@ export class HistoryListComponent implements OnInit {
   }
 
   ngOnChanges(changes:{[propKey:string]:SimpleChange}){
-    console.log("on changes: ", changes.currentYear.currentValue);
     this.currentYear=changes.currentYear.currentValue;
     this.historyEntries=this.overallSituationService.getOverallEntriesWithouEvolution(this.currentYear);
   }

@@ -10,7 +10,6 @@ interface ISelectedItemsOperation extends Function {
 const initialItems: EntrySelect[]=[];
 
 @Injectable({providedIn:'root'})
-@Injectable()
 export class EntrySelectorService {
     selectedItems:Observable<EntrySelect[]>;
     private newSelectedItems: Subject<EntrySelect> = new Subject<EntrySelect>();
@@ -30,7 +29,6 @@ export class EntrySelectorService {
         this.create.pipe(
         map( function(entrySelect: EntrySelect): ISelectedItemsOperation {
           return (selectedItems: EntrySelect[]) => {
-              console.log("in the create pipe")
             return selectedItems.concat(entrySelect);
           };
         }))
@@ -64,24 +62,18 @@ export class EntrySelectorService {
     }
 
     handleEvent(e: any){
-        if(e.target.checked)
-        {
-            console.log("in the handle Event: ",e.target.id);
+        if(e.target.checked){
             this.addEntry({entryName:e.target.id,selected:true});
         }
-        else
-        {
-            console.log("in the handle Event: ", e.target.id);
+        else{
             this.deleteEntry({entryName:e.target.id,selected:true})
         }
     }
 
     private deleteEntry(entrySelected: EntrySelect){
-        console.log("in the deleteEntry: ", entrySelected);
         this.newDeSelectedItems.next(entrySelected);
     }
     private addEntry(entrySelected: EntrySelect){
-        console.log("in the addEntry");
         this.newSelectedItems.next(entrySelected);
     }
 }

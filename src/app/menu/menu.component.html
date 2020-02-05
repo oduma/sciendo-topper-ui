@@ -1,11 +1,11 @@
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" [routerLink]="['/daily',dateProvider.executingDate]"
+    <a class="navbar-brand" [routerLink]="['/daily',executingDate]"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">Daily</a>
     <a class="navbar-brand" [routerLink]="['/overall']"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">Overall</a>
-    <a class="navbar-brand" [routerLink]="['/history',dateProvider.lastYear]"
+    <a class="navbar-brand" [routerLink]="['/history',lastYear]"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">History</a>
     <a class="navbar-brand" [routerLink]="['/admin']"

@@ -53,7 +53,6 @@ export class ArtistNameComponent implements OnInit {
   }
   ngOnInit() {
     this.currentClass=`circular-square ${this.colorAndSizeClassForPicture}`;
-    console.log("color and size in artist name:" ,this.colorAndSizeClassForPicture);
   }
 
 }

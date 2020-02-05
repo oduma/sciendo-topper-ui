@@ -12,8 +12,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./daily-list.component.css']
 })
 export class DailyListComponent implements OnInit {
-  dayEntries: Observable<DayEntryEvolution[]>;
-  private executingDate:string;
+  dayEntries$: Observable<DayEntryEvolution[]>;
+  executingDate:string;
   orange64px:string;  
   constructor(public dailySituationService: DailySituationService, private dateProvider:DateProvider,private route:ActivatedRoute) {
     route.params.subscribe((p)=>this.executingDate=p["today"]);
@@ -27,16 +27,6 @@ export class DailyListComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.dayEntries=this.dailySituationService.getDayEntries(this.executingDate);
+    this.dayEntries$=this.dailySituationService.getDayEntries(this.executingDate);
   }
-
-  // ngOnChanges(changes: {[propKey: string]: SimpleChange}){
-  //   let changedProp :Date=changes["manualDate"].currentValue;
-  //   console.log("I'm getting from the parent:",changedProp);
-  //   this.dayEntries=this.dailySituationService.getDayEntries(changedProp);
-  // }
-
-  // ngOnDestroy(){
-  //   this.dateFoundRef.unsubscribe();
-  // }
 }

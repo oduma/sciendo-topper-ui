@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import { RepositoryService } from './repository-service';
-import { map, tap } from 'rxjs/operators';
 import { isNumber } from 'util';
 import { TimeInterval } from '../models/time-interval';
 import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
@@ -12,10 +11,12 @@ import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 })
 @Injectable()
 export class DateProvider {
+    refreshHour:number;
     absoluteTimeInterval: Observable<TimeInterval>;
-    public executingDate:string;
+    executingDate:string;
     lastYear:string;
     constructor(private repositoryService: RepositoryService){
+        this.refreshHour=18;
         this.absoluteTimeInterval = this.repositoryService.getDataNoParams<TimeInterval>("api/entries/gettimeinterval");
         this.absoluteTimeInterval.subscribe((d)=>{
             this.executingDate =  d.toDate;
@@ -23,7 +24,7 @@ export class DateProvider {
         });
     }
 
-    public loadDate(newDate: string):NgbDateStruct{
+    loadDate(newDate: string):NgbDateStruct{
             const dateParts=newDate.trim().split('-');
             return {year:Number(dateParts[0]), month: Number(dateParts[1]), day:Number(dateParts[2])};
     }

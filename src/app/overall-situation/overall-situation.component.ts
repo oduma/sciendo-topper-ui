@@ -1,9 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DateProvider } from '../services/date-provider';
-import { EntrySelectorService } from '../services/entry-selector-service';
 import { LoaderService } from '../services/loader.service';
-import { Observable } from 'rxjs';
-import { EntrySelect } from '../models/entry-select';
 
 @Component({
   selector: 'app-overall-situation',
@@ -13,7 +10,6 @@ import { EntrySelect } from '../models/entry-select';
 export class OverallSituationComponent implements OnInit {
   thisYear:string;
   constructor(private dateProvider: DateProvider,
-     private entrySelectorService:EntrySelectorService,
      public loaderService: LoaderService) {
   }
 
@@ -22,9 +18,4 @@ export class OverallSituationComponent implements OnInit {
     setTimeout(()=>this.loaderService.isLoading);
 
   }
-
-  ngOnDestroy(){
-    console.log("clear the selection");
-  }
-
 }

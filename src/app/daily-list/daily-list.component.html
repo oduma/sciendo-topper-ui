@@ -1,4 +1,5 @@
-<table class="table table-bordered table-striped">
+<div *ngIf="dayEntries$ | async as dayEntries">
+<table class="table table-bordered table-striped" *ngIf="dayEntries.length >0">
     <thead class="table-dark">
         <tr>
             <th scope="col">Select</th>
@@ -12,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let dayEntry of dayEntries | async">
+        <tr *ngFor="let dayEntry of dayEntries">
                 <th scope="row">
                     <app-entry-selector [entryName]="dayEntry.name"></app-entry-selector>
                 </th>
@@ -34,3 +35,7 @@
         </tr>
     </tbody>
 </table>
+<div *ngIf="dayEntries.length <=0">
+    No entries for {{executingDate}}
+</div>
+</div>

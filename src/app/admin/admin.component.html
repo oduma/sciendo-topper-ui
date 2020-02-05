@@ -1,7 +1,19 @@
-<div>
-    <label for="cacheTimeToLive">Client Cache Time to live:</label>
-    <input type="text" id="cacheTimeToLive">
-</div>
-<div>
-    <input type="button" value="Clear all Cache">
+<div class="container container-fluid">
+    <div class="row pt-4">
+        <h2 class="pb-2">Client Caching:</h2>
+    </div>
+    <div class="row pb-4">
+        <label for="cacheTimeToLive" class="pr-2">Client Cache Time to live:</label>
+        <input type="text" id="cacheTimeToLive" [(ngModel)]="repositoryService.cacheLimit" >
+    </div>
+    <div class="row">
+        <input type="button" value="Clear all Cache" (click)="clearAllCache()">
+    </div>
+    <div class="row pt-4">
+        <h2 class="pb-2">Refresh:</h2>
+    </div>
+    <div class="row pb-4">
+        <label for="refreshHour" class="pr-2">Expected Refresh Hour:</label>
+        <input type="text" id="refreshHour" [(ngModel)]="dateProvider.refreshHour" >
+    </div>
 </div>

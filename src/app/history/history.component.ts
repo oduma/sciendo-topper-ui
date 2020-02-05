@@ -27,7 +27,6 @@ export class HistoryComponent implements OnInit {
 
   onYearSelectChange(selectedValue)
   {
-    console.log(`changed to: ${selectedValue}`);
     let yearHistoryUrl=`history/${selectedValue}`;
     this.currentYear=selectedValue;
     this.router.navigate([yearHistoryUrl]);

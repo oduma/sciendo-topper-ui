@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { EntrySelect } from '../models/entry-select';
 import { EntrySelectorService } from '../services/entry-selector-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,10 +13,11 @@ import { SelectionMadeService } from '../services/selection-made.service';
 })
 export class GraphLauncherComponent implements OnInit {
   selectedEntries$:Observable<EntrySelect[]>;
-  constructor(private entrySelectorService: EntrySelectorService, private modalService: NgbModal, private selectionMadeService:SelectionMadeService) { }
+  constructor(private entrySelectorService: EntrySelectorService, 
+    private modalService: NgbModal, 
+    private selectionMadeService:SelectionMadeService) { }
 
   ngOnInit() {
-    console.log("Init on graph launcher");
     this.selectedEntries$=this.entrySelectorService.selectedItems;
   }
 

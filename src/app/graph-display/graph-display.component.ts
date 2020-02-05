@@ -3,11 +3,9 @@ import { ChartDataSets } from 'chart.js';
 import { Label, Color, BaseChartDirective } from 'ng2-charts';
 import { GraphDataProviderService } from '../services/graph-data-provider.service';
 import { DataForChart } from '../models/chart-data-series';
-import { tap, map } from 'rxjs/operators';
 import { RepositoryService } from '../services/repository-service';
 import { EntryTimeLine } from '../models/entry-time-line';
 import { SelectionMadeService } from '../services/selection-made.service';
-import { EntryBase } from '../models/entry-base';
 import { EntryBaseFormat } from '../models/entry-base-format';
 
 @Component({
@@ -46,7 +44,6 @@ export class GraphDisplayComponent implements OnInit {
           return {name:e.name, pictureUrl:e.pictureUrl, colorAndSizeClass:this.classesAvailable[index++]} as EntryBaseFormat;
         }
       })
-      console.log("Entry Bases:",this.legendItems);
       var dataForChart:DataForChart=this.graphDataProvider.plotEntries(val);
       this.lineChartLabels=dataForChart.timeLineMilestones;
       this.lineChartData=<ChartDataSets[]>dataForChart.dataSeries;

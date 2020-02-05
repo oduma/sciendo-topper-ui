@@ -5,6 +5,7 @@ import { LocalStorageSaveOptions } from '../models/local-stoage-save-options';
   providedIn: 'root'
 })
 export class CacheService {
+    
 
   save(options: LocalStorageSaveOptions) {
     // Set default values for optionals

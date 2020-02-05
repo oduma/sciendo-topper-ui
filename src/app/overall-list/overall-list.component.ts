@@ -11,12 +11,13 @@ import {Position} from '../models/position';
   styleUrls: ['./overall-list.component.css']
 })
 export class OverallListComponent implements OnInit {
-  overallEntries: Observable<OverallEntry[]>;
+  overallEntries$: Observable<OverallEntry[]>;
   @Input()
   thisYear:string;
   orange64px: string;
   constructor(public overallSituationService: OverallSituationService, private dateProvider:DateProvider) {
     this.orange64px="orange-64px";
+
 
    }
 
@@ -27,7 +28,7 @@ export class OverallListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.overallEntries=this.overallSituationService.getOverallEntries(Number(this.thisYear));
+    this.overallEntries$=this.overallSituationService.getOverallEntries(Number(this.thisYear));
 
   }
 

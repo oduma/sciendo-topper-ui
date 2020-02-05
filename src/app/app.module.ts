@@ -37,6 +37,7 @@ import { ArtistInfoService } from './services/artist-info.service';
 import { NgbDateCustomParserFormatterService } from './services/ngb-date-custom-parser-formatter.service';
 import { HttpClientService } from './services/http-client.service';
 import { CacheService } from './services/cache.service';
+import { ServerConfigProviderService } from './services/server-config-provider.service';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { CacheService } from './services/cache.service';
     SelectionMadeService,
     ArtistInfoService,
     HttpClientService,
+    ServerConfigProviderService,
     CacheService,
     LoaderService,
     {
