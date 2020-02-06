@@ -38,6 +38,7 @@ import { NgbDateCustomParserFormatterService } from './services/ngb-date-custom-
 import { HttpClientService } from './services/http-client.service';
 import { CacheService } from './services/cache.service';
 import { ServerConfigProviderService } from './services/server-config-provider.service';
+import { NoOfLovedComponent } from './no-of-loved/no-of-loved.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ServerConfigProviderService } from './services/server-config-provider.s
     GraphModalComponent,
     SpinnerComponent,
     ArtistNameComponent,
-    TodayComponent
+    TodayComponent,
+    NoOfLovedComponent
   ],
   entryComponents:[
     GraphModalComponent

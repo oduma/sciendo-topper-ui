@@ -14,7 +14,11 @@ export class OverallSituationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.thisYear=this.dateProvider.executingDate.split("-")[0];
+    if(this.dateProvider.executingDate==null){
+      this.thisYear=((new Date()).getFullYear()-1).toString();
+    }
+    else
+      this.thisYear=this.dateProvider.executingDate.split("-")[0];
     setTimeout(()=>this.loaderService.isLoading);
 
   }

@@ -1,3 +1,13 @@
 .big-text{
     font-size: 150%;
 }
+
+.title-heart{
+    color:rgb(245, 178, 178);
+}
+.header-heart{
+    text-align: center;
+}
+.column-heart{
+    border-left: 0px hidden;
+}

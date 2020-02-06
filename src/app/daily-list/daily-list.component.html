@@ -5,8 +5,9 @@
             <th scope="col">Select</th>
             <th scope="col">Position</th>
             <th scope="col">Name</th>
+            <th scope="col" class="header-heart column-heart"><fa placement="auto" 
+                ngbTooltip="Number loved tracks"name="heart" class="title-heart"></fa> </th>
             <th scope="col">Hits</th>
-            <th scope="col">Loved Tracks</th>
             <th scope="col">Score</th>
             <th scope="col">Overall Position</th>
             <th scope="col">Overall Score</th>
@@ -23,8 +24,10 @@
                     [previousEntryRank]="getRank(dayEntry.previousDayPosition)"></app-position>
                 </td>
                 <td class="big-text"><app-artist-name [artistName]="dayEntry.name" [artistPictureUrl]="dayEntry.pictureUrl" [colorAndSizeClassForPicture]="orange64px"></app-artist-name></td>
+                <td class="column-heart">
+                    <app-no-of-loved [noOfLovedTracks]="dayEntry.currentDayPosition.noOfLovedTracks"></app-no-of-loved>
+                </td>
                 <td class="big-text">{{dayEntry.currentDayPosition.hits}}</td>
-                <td class="big-text">{{dayEntry.currentDayPosition.noOfLovedTracks}}</td>
                 <td class="big-text">{{dayEntry.currentDayPosition.score}}</td>
                 <td>
                     <app-position 

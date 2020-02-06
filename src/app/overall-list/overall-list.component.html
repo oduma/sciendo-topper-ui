@@ -5,12 +5,13 @@
                 <th scope="col">Select</th>
                 <th scope="col">Position</th>
                 <th scope="col">Name</th>
+                <th scope="col" class="header-heart column-heart"><fa placement="auto" 
+                    ngbTooltip="Number loved tracks"name="heart" class="title-heart"></fa> </th>
                 <th scope="col">Points</th>
-                <th scope="col">No. Loved Tracks</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let overallEntry of overallEntries | async">
+            <tr *ngFor="let overallEntry of overallEntries">
                     <th scope="row">
                         <app-entry-selector [entryName]="overallEntry.name"></app-entry-selector>
                     </th>
@@ -18,8 +19,10 @@
                         [currentEntryRank]="getRank(overallEntry.currentOverallPosition)" 
                         [previousEntryRank]="getRank(overallEntry.previousDayOverallPosition)"></app-position></td>
                     <td class="big-text"><app-artist-name [artistName]="overallEntry.name"  [artistPictureUrl]="overallEntry.pictureUrl" [colorAndSizeClassForPicture]="orange64px"></app-artist-name></td>
+                    <td class="column-heart">
+                        <app-no-of-loved [noOfLovedTracks]="overallEntry.currentOverallPosition.noOfLovedTracks"></app-no-of-loved>
+                    </td>
                     <td class="big-text">{{overallEntry.currentOverallPosition.score}}</td>
-                    <td class="big-text">{{overallEntry.currentOverallPosition.noOfLovedTracks}}</td>
             </tr>
         </tbody>
     </table>

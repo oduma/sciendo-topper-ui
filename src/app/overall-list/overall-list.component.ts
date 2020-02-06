@@ -4,6 +4,7 @@ import { OverallEntry } from '../models/overall-entry';
 import { OverallSituationService } from '../services/overall-situation-service';
 import { DateProvider } from '../services/date-provider';
 import {Position} from '../models/position';
+import { OverallEntryEvolution } from '../models/overall-entry-evolution';
 
 @Component({
   selector: 'app-overall-list',
@@ -11,7 +12,7 @@ import {Position} from '../models/position';
   styleUrls: ['./overall-list.component.css']
 })
 export class OverallListComponent implements OnInit {
-  overallEntries$: Observable<OverallEntry[]>;
+  overallEntries$: Observable<OverallEntryEvolution[]>;
   @Input()
   thisYear:string;
   orange64px: string;

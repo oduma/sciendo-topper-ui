@@ -1,0 +1,25 @@
+.heart-none{
+    color: lightgrey;
+    font-size: 100%;
+}
+
+.heart-normal{
+    font-size: 100%;
+    color:rgb(245, 178, 178);
+}
+
+.heart-big{
+    color:indianred;
+    font-size: 100%;
+}
+
+.heart-huge{
+    color:red;
+    font-size: 100%;
+}
+.love-tooltip .tooltip-inner{
+    background-color: salmon;
+}
+.love-tooltip .arrow::before {
+    background-color: salmon;
+}
