@@ -4,9 +4,20 @@
 .title-heart{
     color:rgb(245, 178, 178);
 }
-.header-heart{
+.header{
     text-align: center;
 }
 .column-heart{
     border-left: 0px hidden;
+}
+
+.table-width{
+    width:100%;
+}
+.title-check{
+    color:orange;
+    padding-left: 3px;
+}
+.column-check{
+    border-right:0px hidden;
 }

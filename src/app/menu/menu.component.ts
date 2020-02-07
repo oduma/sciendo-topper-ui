@@ -11,6 +11,7 @@ import { tap } from 'rxjs/operators';
 export class MenuComponent implements OnInit {
   lastYear:string;
   executingDate: string;
+
   constructor(public dateProvider: DateProvider) {
    }
 

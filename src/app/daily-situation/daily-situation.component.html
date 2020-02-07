@@ -1,5 +1,7 @@
-<app-today [model]="model | async"></app-today>
-<div class="container container-fluid">
+<div class="container container-fluid container-width">
+    <div class="row">
+        <app-today [model]="model | async"></app-today>
+    </div>
     <div class="row">
         <app-daily-list></app-daily-list>
     </div>

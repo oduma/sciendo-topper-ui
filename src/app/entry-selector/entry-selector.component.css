@@ -1,0 +1,22 @@
+.check-unselected{
+    color: white;
+    background-color: white;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 4px;
+    border-color: grey;
+    border-style: solid;
+    border-width: 1px;
+
+}
+
+.check-selected{
+    color: white;
+    background-color: orange;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 4px;
+    border-color: cadetblue;
+    border-style: solid;
+    border-width: 1px;
+}
