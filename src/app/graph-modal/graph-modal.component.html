@@ -1,13 +1,12 @@
-<div class="modal-header">
-    <h4 class="modal-title">Ploting evolution of: {{entries.length}} entries.</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+<div class="modal-header modal-dark">
+  <h4 class="modal-title">Ploting evolution of: {{entries.length}} entries.</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
   <div class="modal-body">
     <app-graph-display></app-graph-display>
 </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  <div class="modal-footer modal-dark">
+    <button type="button" class="btn btn-outline-light" (click)="activeModal.close('Close click')">Close</button>
   </div>
-`
