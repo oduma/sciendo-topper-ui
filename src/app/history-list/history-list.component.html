@@ -1,21 +1,23 @@
-<table class="table table-bordered table-striped">
+<table class="table table-xl">
     <thead class="table-dark">
         <tr>
             <th scope="col">Position</th>
             <th scope="col">Name</th>
             <th scope="col" class="header-heart column-heart"><fa placement="auto" 
                 ngbTooltip="Number loved tracks"name="heart" class="title-heart"></fa> </th>
-        <th scope="col">Score</th>
+            <th scope="col">Score</th>
         </tr>
     </thead>
     <tbody>
-        <tr class = "big-text" *ngFor="let historyEntry of historyEntries | async">
-                <td>{{historyEntry.currentOverallPosition.rank}}</td>
-                <td class="big-text"><app-artist-name [artistName]="historyEntry.name"  [artistPictureUrl]="historyEntry.pictureUrl"  [colorAndSizeClassForPicture]="orange64px"></app-artist-name></td>
-                <td class="column-heart">
+        <tr *ngFor="let historyEntry of historyEntries | async">
+                <td class="{{getPositionClass(historyEntry.currentOverallPosition.rank)}}">
+                    <span class="position">{{historyEntry.currentOverallPosition.rank}}</span>
+                </td>
+                <td class="{{getPositionClass(historyEntry.currentOverallPosition.rank)}}"><app-artist-name [artistName]="historyEntry.name"  [artistPictureUrl]="historyEntry.pictureUrl"  [colorAndSizeClassForPicture]="orange64px"></app-artist-name></td>
+                <td class="column-heart {{getPositionClass(historyEntry.currentOverallPosition.rank)}}">
                     <app-no-of-loved [noOfLovedTracks]="historyEntry.currentOverallPosition.noOfLovedTracks"></app-no-of-loved>
                 </td>
-                <td class="big-text">{{historyEntry.currentOverallPosition.score}}</td>
+                <td class="{{getPositionClass(historyEntry.currentOverallPosition.rank)}}">{{historyEntry.currentOverallPosition.score}}</td>
         </tr>
     </tbody>
 </table>

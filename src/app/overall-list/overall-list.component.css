@@ -1,11 +1,8 @@
-.big-text{
-    font-size: 150%;
-}
 
 .title-heart{
     color:rgb(245, 178, 178);
 }
-.header-heart{
+.header{
     text-align: center;
 }
 .column-heart{
@@ -14,4 +11,42 @@
 .title-check{
     color:orange;
     padding-left: 3px;
+}
+.column-check{
+    border-right:0px hidden;
+}
+
+.number-one{
+    background-color:rgb(250, 242, 169) ;
+    line-height: 0;
+}
+
+.number-one-with-text{
+    font-size:150%
+}
+
+.number-two{
+    background-color:rgb(240, 240, 234) ;
+    line-height: 0;
+}
+
+.number-two-with-text{
+    font-size:125%
+}
+
+.number-three{
+    background-color: rgb(245, 218, 178);
+    line-height: 0;
+}
+
+.number-three-with-text{
+    font-size:100%
+}
+
+.lower-positions{
+    background-color: white;
+    line-height: 0;
+}
+.lower-positions-with-text{
+    font-size:80%
 }

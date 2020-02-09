@@ -17,4 +17,18 @@ export class PositionComponent implements OnInit {
     this.movement=(tempMovement>0)?`+${tempMovement}`:`${tempMovement}`;
     this.isRanked=(this.currentEntryRank<9999);
   }
+
+  getPositionClass(){
+    switch (this.currentEntryRank) {
+      case 1:
+        return "number-one";
+      case 2:
+        return "number-two";
+       case 3:
+         return "number-three";
+      default:
+         return "lower-positions";
+    }
+  }
+
 }

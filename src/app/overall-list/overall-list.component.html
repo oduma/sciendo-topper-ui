@@ -1,5 +1,5 @@
 <div *ngIf="overallEntries$ | async as overallEntries">
-<table class="table table-bordered table-striped table-xl" *ngIf="overallEntries.length > 0">
+<table class="table table-xl" *ngIf="overallEntries.length > 0">
         <thead class="table-dark">
             <tr>
                 <th scope="col" class="column-check"><fa  placement="auto" 
@@ -8,23 +8,23 @@
                 <th scope="col">Position</th>
                 <th scope="col">Name</th>
                 <th scope="col" class="header-heart column-heart"><fa placement="auto" 
-                    ngbTooltip="Number loved tracks"name="heart" class="title-heart"></fa> </th>
+                    ngbTooltip="Number of loved tracks"name="heart" class="title-heart"></fa> </th>
                 <th scope="col">Points</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let overallEntry of overallEntries">
-                    <th scope="row column-check">
+                    <th scope="row" class="column-check header {{getPositionClassForCheckBox(overallEntry.currentOverallPosition.rank)}}">
                         <app-entry-selector [entryName]="overallEntry.name"></app-entry-selector>
                     </th>
-                    <td><app-position 
+                    <td class="{{getPositionClass(overallEntry.currentOverallPosition.rank)}}"><app-position 
                         [currentEntryRank]="getRank(overallEntry.currentOverallPosition)" 
                         [previousEntryRank]="getRank(overallEntry.previousDayOverallPosition)"></app-position></td>
-                    <td class="big-text"><app-artist-name [artistName]="overallEntry.name"  [artistPictureUrl]="overallEntry.pictureUrl" [colorAndSizeClassForPicture]="orange64px"></app-artist-name></td>
-                    <td class="column-heart">
+                    <td class="{{getPositionClass(overallEntry.currentOverallPosition.rank)}}"><app-artist-name [artistName]="overallEntry.name"  [artistPictureUrl]="overallEntry.pictureUrl" [colorAndSizeClassForPicture]="orange64px"></app-artist-name></td>
+                    <td class="column-heart {{getPositionClass(overallEntry.currentOverallPosition.rank)}}">
                         <app-no-of-loved [noOfLovedTracks]="overallEntry.currentOverallPosition.noOfLovedTracks"></app-no-of-loved>
                     </td>
-                    <td class="big-text">{{overallEntry.currentOverallPosition.score}}</td>
+                    <td class="{{getPositionClass(overallEntry.currentOverallPosition.rank)}}">{{overallEntry.currentOverallPosition.score}}</td>
             </tr>
         </tbody>
     </table>

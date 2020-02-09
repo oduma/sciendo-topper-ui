@@ -1,21 +1,21 @@
 <div *ngIf="isRanked" class="table">
         <div class="row">
-          <div class="cell rowspan2 position">
-                      {{currentEntryRank}}
-            </div>
+          <div class="cell rowspan2">
+            <span  class="position {{getPositionClass()}}">{{currentEntryRank}}</span>
+          </div>
           <div class="cell">
-              <span *ngIf="previousEntryRank!=0">{{movement}}</span>    
+              <span *ngIf="previousEntryRank!=0" class="movement">{{movement}}</span>    
               <p placement="auto" ngbTooltip="New entry!" tooltipClass="new-entry">
-                <fa *ngIf="previousEntryRank==0" name="exclamation" class="text-danger sub-align"></fa>
+                <fa *ngIf="previousEntryRank==0" name="star" class="text-danger sub-align"></fa>
               </p>
           </div>
         </div>
         <div class="row">
           <div class="cell"><fa *ngIf="currentEntryRank<previousEntryRank || previousEntryRank===0" 
             name="chevron-circle-up" 
-            class="text-success" size="2x"></fa>
-        <fa *ngIf="currentEntryRank>previousEntryRank && previousEntryRank>0" name="chevron-circle-down" class="text-danger" size="2x"></fa>
-        <fa *ngIf="currentEntryRank===previousEntryRank" name="stop-circle" class="text-warning" size="2x"></fa></div>
+            class="text-success"></fa>
+        <fa *ngIf="currentEntryRank>previousEntryRank && previousEntryRank>0" name="chevron-circle-down" class="text-danger"></fa>
+        <fa *ngIf="currentEntryRank===previousEntryRank" name="stop-circle" class="text-warning"></fa></div>
         </div>
       </div>
-<div *ngIf="!isRanked">Not<br/>Ranked</div>
+<div *ngIf="!isRanked">Not Ranked</div>

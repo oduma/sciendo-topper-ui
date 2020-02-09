@@ -1,12 +1,34 @@
 .position{
-    font-size: 200%;
+    font-size: 100%;
+    font-weight: bold;
     vertical-align: text-top;
-    
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    line-height: 1.6em;
+    margin-right: 5px;
+    text-align: center;
+    width: 1.6em;
+    display: inline-block; 
+}
+.number-one{
+  background-color: gold;
+}
+.number-two{
+  background-color: silver;
+}
+.number-three{
+  background-color: orangered;
 }
 
 .sub-align{
     align-content: center;
     text-align: center;
+    font-size: 50%;
+}
+
+.movement{
+  font-size:75%;
 }
 
 @supports (display:grid) and (display:contents) {
